@@ -1,0 +1,183 @@
+@font-face {
+  font-family: "Poppins-Regular";
+  src: url("../fonts/poppins/Poppins-Regular.ttf"); }
+@font-face {
+  font-family: "Poppins-SemiBold";
+  src: url("../fonts/poppins/Poppins-SemiBold.ttf"); }
+@font-face {
+  font-family: "Poppins-Medium";
+  src: url("../fonts/poppins/Poppins-Medium.ttf"); }
+@font-face {
+  font-family: "Muli-Bold";
+  src: url("../fonts/muli/Muli-Bold.ttf"); }
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+body {
+  font-family: "Poppins-Regular";
+  font-size: 15px;
+  color: #666;
+  margin: 0; }
+
+
+input, textarea, select, button {
+  font-family: "Poppins-Regular";
+  font-size: 15px;
+  color: white; }
+
+p, h1, h2, h3, h4, h5, h6, ul {
+  margin: 0; }
+
+select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  border: none; }
+  select option[value=""][disabled] {
+    display: none; }
+
+img {
+  max-width: 100%;
+  vertical-align: middle; }
+
+body {
+  background: url("../images/119.jpg");
+  background-size:cover; }
+
+.wrapper {
+  display: flex;
+  align-items: center; }
+
+
+
+
+#wizard {
+  background: white;
+  margin-right: 60px;
+  padding: 60px 75px 65px; }
+
+
+.form-row {
+  margin-bottom: 24px; }
+  .form-row label {
+    margin-bottom: 8px;
+    display: block; }
+  .form-row.form-group {
+    display: flex; }
+    .form-row.form-group .form-holder {
+      width: 100%;
+      margin-right: 21px; }
+      .form-row.form-group .form-holder:last-child {
+        margin-right: 0; }
+
+
+.form-control {
+  height: 42px;
+  border: 1px solid #e6e6e6;
+  background: none;
+  width: 100%;
+  padding: 0 18px; }
+  .form-control:focus {
+    border-color: #4b6eb8; }
+  .form-control::-webkit-input-placeholder {
+    color: #999;
+    font-size: 13px; }
+  .form-control::-moz-placeholder {
+    color: #999;
+    font-size: 13px; }
+  .form-control:-ms-input-placeholder {
+    color: #999;
+    font-size: 13px; }
+  .form-control:-moz-placeholder {
+    color: #999;
+    font-size: 13px; }
+
+
+
+
+@-webkit-keyframes hvr-icon-wobble-horizontal {
+  16.65% {
+    -webkit-transform: translateX(6px);
+    transform: translateX(6px); }
+  33.3% {
+    -webkit-transform: translateX(-5px);
+    transform: translateX(-5px); }
+  49.95% {
+    -webkit-transform: translateX(4px);
+    transform: translateX(4px); }
+  66.6% {
+    -webkit-transform: translateX(-2px);
+    transform: translateX(-2px); }
+  83.25% {
+    -webkit-transform: translateX(1px);
+    transform: translateX(1px); }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0); } }
+@keyframes hvr-icon-wobble-horizontal {
+  16.65% {
+    -webkit-transform: translateX(6px);
+    transform: translateX(6px); }
+  33.3% {
+    -webkit-transform: translateX(-5px);
+    transform: translateX(-5px); }
+  49.95% {
+    -webkit-transform: translateX(4px);
+    transform: translateX(4px); }
+  66.6% {
+    -webkit-transform: translateX(-2px);
+    transform: translateX(-2px); }
+  83.25% {
+    -webkit-transform: translateX(1px);
+    transform: translateX(1px); }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0); } }
+
+@media (max-width: 0px) {
+
+
+  #wizard {
+    margin-right: 40px;
+    min-height: 829px;
+    padding-left: 60px;
+    padding-right: 60px; } }
+@media (max-width: 991px) {
+  .wrapper {
+    justify-content: center; }
+    .wrapper .image-holder {
+      display: none; }
+    .wrapper form {
+      width: 60%; }
+
+  #wizard {
+    margin-right: 0;
+    padding-left: 40px;
+     } }
+@media (max-width:  0px) {
+  .wrapper {
+    height: auto;
+    display: block; }
+    .wrapper .image-holder {
+      width: 100%;
+      display: block; }
+    .wrapper form {
+      width: 100%; }
+
+  #wizard {
+    min-height: unset;
+    padding: 70px 20px 40px; }
+
+  .form-row.form-group {
+    display: block; }
+    .form-row.form-group .form-holder {
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 24px; }
+
+  .item .purchase {
+    margin-left: 11px; } }
+
+/*# sourceMappingURL=style.css.map */
