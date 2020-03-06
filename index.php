@@ -105,7 +105,7 @@ if ($_POST) {
                             <div class="wow fadeInUp upper latter-space" data-wow-delay="0.2s">Login / SignUp</div>
                             <div class="wow fadeInUp" data-wow-delay="0.7s">
                                 <button type="button" class="btn btn-primary" style="padding-left: 60px; padding-right: 55px;" onclick="window.location.href='login.php?type=admin'">Company</button>
-                                <button type="button" class="btn btn-success" style="padding-left: 60px; padding-right: 55px;" onclick="window.location.href='login.php?type=user'">I am User</button>
+                                <button type="button" class="btn btn-success" style="padding-left: 60px; padding-right: 55px;" onclick="window.location.href='login.php?type=user'">User</button>
                             </div>
                         </div>
                     </div>

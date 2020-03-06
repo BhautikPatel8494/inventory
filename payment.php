@@ -6,10 +6,9 @@ session_start();
 $payment = $_GET['amount'];
 $companyId = $_SESSION['company_id'];
 
-if ($_POST) {
+if (isset($_POST['pay'])) {
     $amount = $_POST['amount'];
     $sql = "INSERT INTO payment (company_id, amount, status) VALUES ($companyId,'$amount', 1)";
-    echo $connect->query($sql);
     
     if ($connect->query($sql) === TRUE) {
         header('location: http://localhost/inventory-management-system/dashboard.php');
@@ -88,7 +87,7 @@ if ($_POST) {
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" name="amount" value="<?php $_GET['amount'] ?>" />
+                            <input type="hidden" name="amount" value="<?php echo $_GET['amount'] ?>" />
                             <ul class="nav nav-pills nav-stacked">
                                 <li class="active"><a href="#"><span class="badge pull-right"><span class="glyphicon glyphicon-usd"></span><?php echo $payment ?></span> Final Payment</a>
                                 </li>

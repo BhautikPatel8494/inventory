@@ -1,4 +1,6 @@
 </div> <!-- container -->
+</div>
+</div>
 
 <script src="assests/plugins/fileinput/js/plugins/canvas-to-blob.min.js'); ?>" type="text/javascript"></script>
 <script src="assests/plugins/fileinput/js/plugins/sortable.min.js" type="text/javascript"></script>

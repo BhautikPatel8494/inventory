@@ -66,7 +66,7 @@ if (isset($_POST["adminSubmit"])) {
 			if (move_uploaded_file($_FILES['certificate']['tmp_name'], $url)) {
 
 				$type1 = explode('.', $_FILES['logo']['name']);
-				$type1 = $type[count($type1) - 1];
+				$type1 = $type1[count($type1) - 1];
 				$url1 = 'assests/images/logo/' . uniqid(rand()) . '.' . $type1;
 
 				if (in_array($type1, array('gif', 'jpg', 'jpeg', 'png', 'JPG', 'GIF', 'JPEG', 'PNG'))) {

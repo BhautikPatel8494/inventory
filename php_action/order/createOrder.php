@@ -21,11 +21,16 @@ if ($_POST) {
 	$paymentStatus = $_POST['paymentStatus'];
 	$paymentPlace = $_POST['paymentPlace'];
 	$gstn = $_POST['gstn'];
-	$userid = $_SESSION['userId'];
+	$userid = null;
+	if (isset($_SESSION['userId'])) {
+		$userid = $_SESSION['userId'];
+	} else { 
+		$userid = 0;
+	}
 
 	$sql = "INSERT INTO orders (company_id, order_date, client_name, client_contact, sub_total, vat, total_amount, discount, grand_total, paid, due, payment_type, payment_status,payment_place, gstn,order_status,user_id) VALUES ($companyId,'$orderDate', '$clientName', '$clientContact', '$subTotalValue', '$vatValue', '$totalAmountValue', '$discount', '$grandTotalValue', '$paid', '$dueValue', $paymentType, $paymentStatus,$paymentPlace,$gstn, 1,$userid)";
 
-	$order_id;
+	$order_id = null;
 	$orderStatus = false;
 	if ($connect->query($sql) === true) {
 		$order_id = $connect->insert_id;

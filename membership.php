@@ -35,7 +35,7 @@ if ($_POST) {
 <body class="site2" data-spy="scroll" data-target=".mainmenu-area">
 
     <!-- Price-Area -->
-    <section class="section-padding gray-bg" id="price-area">
+    <section class="gray-bg" id="price-area" style="padding: 20px">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-8 col-sm-offset-2">

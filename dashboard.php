@@ -24,13 +24,19 @@ while ($orderResult = $orderQuery->fetch_assoc()) {
 	$totalRevenue += $orderResult['paid'];
 }
 
-$lowStockSql = "SELECT * FROM product WHERE quantity <= 3 AND status = 1 AND company_id = $companyId";
+$lowStockSql = "SELECT * FROM product WHERE quantity <= 5 AND status = 1 AND company_id = $companyId";
 $lowStockQuery = $connect->query($lowStockSql);
 $countLowStock = $lowStockQuery->num_rows;
 
 $userwisesql = "SELECT user_details.name , SUM(orders.grand_total) as totalorder FROM orders INNER JOIN user_details ON orders.user_id = user_details.id WHERE orders.order_status = 1 AND orders.company_id = $companyId GROUP BY orders.user_id";
 $userwiseQuery = $connect->query($userwisesql);
 $userwieseOrder = $userwiseQuery->num_rows;
+
+$adminsql = "SELECT SUM(grand_total) AS value_sum FROM orders WHERE company_id = $companyId AND user_id = 0";
+$adminQuery = $connect->query($adminsql);
+while($record = $adminQuery->fetch_array()){
+    $total = $record['value_sum'];
+}
 
 $connect->close();
 
@@ -115,7 +121,7 @@ $connect->close();
 
 		<div class="card">
 			<div class="cardHeader" style="background-color:#245580;">
-			<h1><?php if ($totalRevenue) {
+				<h1><?php if ($totalRevenue) {
 						echo $totalRevenue;
 					} else {
 						echo '0';
@@ -158,7 +164,11 @@ $connect->close();
 							</tr>
 						</thead>
 						<tbody>
-						<?php while ($orderResult = $userwiseQuery->fetch_assoc()) { ?>
+							<tr>
+								<td> You </td>
+								<td> <?php echo $total ? $total : 0 ?>
+							</tr>
+							<?php while ($orderResult = $userwiseQuery->fetch_assoc()) { ?>
 								<tr>
 									<td><?php echo $orderResult['name'] ?></td>
 									<td><?php echo $orderResult['totalorder'] ?></td>
