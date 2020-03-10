@@ -1,4 +1,14 @@
-<?php require_once 'php_action/core.php'; ?>
+<?php require_once 'php_action/core.php';
+
+$sql = "SELECT logo, company_name FROM company_details WHERE id = $companyId";
+
+$logoResult = $connect->query($sql);
+$logoData = $logoResult->fetch_array();
+
+$logo = $logoData[0];
+$companyName = $logoData[1];
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,8 +44,7 @@
         <div class="top-left-part">
           <a class="logo" href="dashboard.php">
             <b>
-              <img src="../plugins/images/admin-logo.png" alt="home" class="dark-logo" />
-              <img src="../plugins/images/admin-logo-dark.png" alt="home" class="light-logo" />
+              <img src="<?php echo $logo ?>" alt="home" class="light-logo" height="50" width="219" />
             </b>
           </a>
         </div>
@@ -44,17 +53,12 @@
             <a class="nav-toggler open-close waves-effect waves-light hidden-md hidden-lg" href="javascript:void(0)"><i class="fa fa-bars"></i></a>
           </li>
           <li>
-            <form role="search" class="app-search hidden-sm hidden-xs m-r-10">
-              <input type="text" placeholder="Search..." class="form-control">
-              <a href="">
-                <i class="fa fa-search"></i>
-              </a>
-            </form>
-          </li>
-          <li>
-            <a class="profile-pic" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="waves-effect"> <img src="../plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle"><b class="hidden-xs">Steave</b></a>
+            <a class="profile-pic" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="waves-effect"><b class="hidden-xs"><?php echo $companyName ?></b></a>
             <ul class="dropdown-menu">
-              <li id="topNavLogout"><a href="setting.php"> <i class="glyphicon glyphicon-tasks"></i> Setting</a></li>
+              <?php
+              if ($_SESSION['role'] == 1) { ?>
+                <li id="topNavLogout"><a href="setting.php"> <i class="glyphicon glyphicon-tasks"></i> Setting</a></li>
+               <?php } ?>
               <li id="topNavLogout"><a href="logout.php"> <i class="glyphicon glyphicon-log-out"></i> Logout</a></li>
             </ul>
           </li>
@@ -67,35 +71,47 @@
           <h3><span class="fa-fw open-close"><i class="ti-close ti-menu"></i></span> <span class="hide-menu">Navigation</span></h3>
         </div>
         <ul class="nav" id="side-menu">
-          <li style="padding: 70px 0 0;">
-            <a href="dashboard.php" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>Dashboard</a>
-          </li>
-          <li>
-            <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Users</a>
-            <ul class="dropdown-menu">
-              <li id="topNavAddOrder"><a href="userDetails.php?o=add"> <i class="glyphicon glyphicon-plus"></i> Add User</a></li>
-              <li id="topNavManageOrder"><a href="userDetails.php?o=manage"> <i class="glyphicon glyphicon-edit"></i> Manage User</a></li>
-              <li id="topNavManageOrder"><a href="userDetails.php?o=bank"> <i class="glyphicon glyphicon-piggy-bank"></i> Bank Details</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="waves-effect"><i class="fa fa-columns fa-fw" aria-hidden="true"></i>Orders</a>
-            <ul class="dropdown-menu">
-              <li id="topNavAddOrder"><a href="orders.php?o=add"> <i class="glyphicon glyphicon-plus"></i> Add Orders</a></li>
-              <li id="topNavManageOrder"><a href="orders.php?o=manord"> <i class="glyphicon glyphicon-edit"></i> Manage Orders</a></li>
-            </ul>
-          </li>
-          <?php if ($_SESSION['role'] == 1) { ?>
-            <li>
-              <a href="brand.php" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i>Brand</a>
+          <?php if ($_SESSION['role'] == 3) { ?>
+            <li style="padding: 70px 0 0;">
+              <a href="adminDashboard.php?o=manage" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>Dashboard</a>
             </li>
             <li>
-              <a href="categories.php" class="waves-effect"><i class="fa fa-font fa-fw" aria-hidden="true"></i>Category</a>
+              <a href="package.php" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>Package</a>
             </li>
             <li>
-              <a href="product.php" class="waves-effect"><i class="fa fa-globe fa-fw" aria-hidden="true"></i>Product</a>
+              <a href="companyDetails.php?o=manage" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>Company</a>
             </li>
-          <?php } ?>
+          <?php } else { ?>
+            <li style="padding: 70px 0 0;">
+              <a href="dashboard.php" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>Dashboard</a>
+            </li>
+            <li>
+              <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Users</a>
+              <ul class="dropdown-menu">
+                <li id="topNavAddOrder"><a href="userDetails.php?o=add"> <i class="glyphicon glyphicon-plus"></i> Add User</a></li>
+                <li id="topNavManageOrder"><a href="userDetails.php?o=manage"> <i class="glyphicon glyphicon-edit"></i> Manage User</a></li>
+                <li id="topNavManageOrder"><a href="userDetails.php?o=bank"> <i class="glyphicon glyphicon-piggy-bank"></i> Bank Details</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="waves-effect"><i class="fa fa-columns fa-fw" aria-hidden="true"></i>Orders</a>
+              <ul class="dropdown-menu">
+                <li id="topNavAddOrder"><a href="orders.php?o=add"> <i class="glyphicon glyphicon-plus"></i> Add Orders</a></li>
+                <li id="topNavManageOrder"><a href="orders.php?o=manord"> <i class="glyphicon glyphicon-edit"></i> Manage Orders</a></li>
+              </ul>
+            </li>
+            <?php if ($_SESSION['role'] == 1) { ?>
+              <li>
+                <a href="brand.php" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i>Brand</a>
+              </li>
+              <li>
+                <a href="categories.php" class="waves-effect"><i class="fa fa-font fa-fw" aria-hidden="true"></i>Category</a>
+              </li>
+              <li>
+                <a href="product.php" class="waves-effect"><i class="fa fa-globe fa-fw" aria-hidden="true"></i>Product</a>
+              </li>
+          <?php }
+          } ?>
         </ul>
       </div>
 

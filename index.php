@@ -378,7 +378,31 @@ if ($_POST) {
             <div class="row prices tab-content">
                 <div id="yearly" class="tab-pane fade in active">
 
-                    <div class="col-xs-6 col-md-4 wow fadeInLeft" data-wow-delay="0.4s">
+                    <?php
+                    $sql = "SELECT * FROM package";
+                    $result = $connect->query($sql);
+
+                    while ($row = $result->fetch_array()) {
+                        ?>
+                        <div class="col-xs-6 col-md-4 wow fadeInLeft" data-wow-delay="0.4s">
+                            <div class="price-box active" style="height:500px">
+                                <h4><?php echo $row[1] ?></h4>
+                                <h3 class="amount">&#8377;<?php echo $row[2] ?> /<span>Year</span></h3>
+                                <ul class="price-list">
+                                    <?php
+                                        $categories = '';
+                                        $myArray = explode(',', $row[3]);
+                                        foreach ($myArray as $facility) {
+                                            echo '<li>' . $facility . '</li>';
+                                        }
+                                        ?>
+                                </ul>
+                                <a href="register.php?type=admin" class="bttn bttn-sm bttn-default">Purchase Now</a>
+                            </div>
+                        </div>
+                    <?php } ?>
+
+                    <!-- <div class="col-xs-6 col-md-4 wow fadeInLeft" data-wow-delay="0.4s">
                         <div class="price-box active" style="height:500px">
                             <h4>Premium</h4>
                             <h3 class="amount">&#8377;6000 /<span>Year</span></h3>
@@ -414,7 +438,7 @@ if ($_POST) {
                             </ul>
                             <a href="register.php?type=admin" class="bttn bttn-sm bttn-default">Purchase Now</a>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

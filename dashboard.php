@@ -8,9 +8,6 @@ $sql = "SELECT * FROM product WHERE status = 1 AND company_id = $companyId";
 $query = $connect->query($sql);
 $countProduct = $query->num_rows;
 
-$suggationSql = "SELECT * FROM contact LIMIT 5";
-$suggationQuery = $connect->query($suggationSql);
-
 $userSql = "SELECT * FROM user_details WHERE company_id = $companyId";
 $userQuery = $connect->query($userSql);
 $countUsers = $userQuery->num_rows;
@@ -179,35 +176,6 @@ $connect->close();
 					<!--<div id="calendar"></div>-->
 				</div>
 			</div>
-			<div class="panel panel-default">
-				<div class="panel-heading"> <i class="glyphicon glyphicon-calendar"></i> Suggation Box</div>
-				<div class="panel-body">
-					<table class="table" id="productTable">
-						<thead>
-							<tr>
-								<th style="width:20%;">Name</th>
-								<th style="width:20%;">Email</th>
-								<th style="width:20%;">Subject</th>
-								<th style="width:40%;">Message</th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php while ($orderResult = $suggationQuery->fetch_assoc()) { ?>
-								<tr>
-									<td><?php echo $orderResult['name'] ?></td>
-									<td><?php echo $orderResult['email'] ?></td>
-									<td><?php echo $orderResult['subject'] ?></td>
-									<td><?php echo $orderResult['message'] ?></td>
-
-								</tr>
-
-							<?php } ?>
-						</tbody>
-					</table>
-					<!--<div id="calendar"></div>-->
-				</div>
-			</div>
-
 		</div>
 	<?php  } ?>
 
