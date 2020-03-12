@@ -49,7 +49,7 @@ if ($_GET['o'] == 'add') {
                             <div class="form-group">
                                 <label for="discount" class="col-sm-3 control-label">Pancard</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="pancard" name="pancard" onkeyup="discountFunc()" autocomplete="off" />
+                                    <input type="text" class="form-control" id="pancard" name="pancard" autocomplete="off" />
                                 </div>
                             </div>
                             <!--/form-group-->
@@ -172,7 +172,7 @@ if ($_GET['o'] == 'add') {
                         <thead>
                             <tr>
                                 <th style="width:10%;">User Name</th>
-                                <th style="width:10%;">Pancard</th>
+                                <th style="width:10%;">Email</th>
                                 <th style="width:10%;">Building No</th>
                                 <th style="width:10%;">Street Name</th>
                                 <th style="width:10%;">Landmark</th>
@@ -191,6 +191,7 @@ if ($_GET['o'] == 'add') {
                         <thead>
                             <tr>
                                 <th style="width:10%;">User Name</th>
+                                <th style="width:10%;">Email</th>
                                 <th style="width:10%;">Bank Name</th>
                                 <th style="width:10%;">IFSC Code</th>
                                 <th style="width:10%;">Account Name</th>
@@ -200,6 +201,7 @@ if ($_GET['o'] == 'add') {
                         </thead>
                     </table>
                 <?php } else if ($_GET['o'] == 'edit') { ?>
+                    <div class="success-messages"></div>
                     <form class="form-horizontal" method="POST" action="php_action/user/editUser.php" id="createUserForm">
 
                         <?php $userId = $_GET['i'];
@@ -346,77 +348,6 @@ if ($_GET['o'] == 'add') {
         </div>
     </div>
 </div>
-
-<!-- edit categories brand -->
-<div class="modal fade" id="editUserModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title"><i class="fa fa-edit"></i> Edit User</h4>
-            </div>
-            <div class="modal-body" style="max-height:450px; overflow:auto;">
-
-                <div class="div-loading">
-                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-                    <span class="sr-only">Loading...</span>
-                </div>
-
-                <div class="div-result">
-
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active"><a href="#userInfo" aria-controls="profile" role="tab" data-toggle="tab">User Info</a></li>
-                    </ul>
-
-                    <div class="tab-content">
-
-
-
-                        <!-- product image -->
-                        <div role="tabpanel" class="tab-pane active" id="userInfo">
-                            <form class="form-horizontal" id="editUserForm" action="php_action/user/editUser.php" method="POST">
-                                <br />
-
-                                <div id="edit-user-messages"></div>
-
-                                <div class="form-group">
-                                    <label for="edituserName" class="col-sm-3 control-label">User Name: </label>
-
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="edituserName" placeholder="User Name" name="edituserName" autocomplete="off">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="editPassword" class="col-sm-3 control-label">Password: </label>
-
-                                    <div class="col-sm-8">
-                                        <input type="password" class="form-control" id="editPassword" placeholder="Password" name="editPassword" autocomplete="off">
-                                    </div>
-                                </div>
-
-                                <div class="modal-footer editUserFooter">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
-
-                                    <button type="submit" class="btn btn-success" id="editProductBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
-                                </div>
-                            </form>
-                        </div>
-                        <!-- /product info -->
-                    </div>
-
-                </div>
-
-            </div>
-
-
-        </div>
-
-    </div>
-
-</div>
-<!-- /categories brand -->
 
 <!-- categories brand -->
 <div class="modal fade" tabindex="-1" role="dialog" id="removeUserModal">

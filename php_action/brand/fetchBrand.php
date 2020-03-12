@@ -4,7 +4,7 @@ require_once '../core.php';
 
 
 
-$sql = "SELECT brand_id, brand_name, brand_active, brand_status FROM brands WHERE brand_status = 1 AND company_id = $companyId";
+$sql = "SELECT brand_id, brand_name, brand_active FROM brands WHERE company_id = $companyId";
 $result = $connect->query($sql);
 
 $output = array('data' => array());

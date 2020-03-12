@@ -8,6 +8,20 @@ $logoData = $logoResult->fetch_array();
 $logo = $logoData[0];
 $companyName = $logoData[1];
 
+if (isset($_SESSION['userId'])) {
+  $userId = $_SESSION['userId'];
+  $permissionSql = "SELECT * FROM permission WHERE company_id = $companyId AND user_id = $userId";
+
+  $permissionResult = $connect->query($permissionSql);
+  $permissionData = $permissionResult->fetch_array();
+
+  $brandAccess = $permissionData[3];
+  $catogoryAccess = $permissionData[4];
+  $productAccess = $permissionData[5];
+  $orderAccess = $permissionData[6];
+  $userAccess = $permissionData[7];
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,11 +56,15 @@ $companyName = $logoData[1];
     <nav class="navbar navbar-default navbar-static-top m-b-0">
       <div class="navbar-header">
         <div class="top-left-part">
-          <a class="logo" href="dashboard.php">
-            <b>
-              <img src="<?php echo $logo ?>" alt="home" class="light-logo" height="50" width="219" />
-            </b>
-          </a>
+          <?php if ($_SESSION['role'] == 3) { ?>
+            <a class="logo" href="adminDashboard.php">
+            <?php } else { ?>
+              <a class="logo" href="dashboard.php">
+              <?php } ?>
+              <b>
+                <img src="<?php echo $logo ?>" alt="home" class="light-logo" height="50" width="219" />
+              </b>
+              </a>
         </div>
         <ul class="nav navbar-top-links navbar-right pull-right">
           <li>
@@ -58,7 +76,7 @@ $companyName = $logoData[1];
               <?php
               if ($_SESSION['role'] == 1) { ?>
                 <li id="topNavLogout"><a href="setting.php"> <i class="glyphicon glyphicon-tasks"></i> Setting</a></li>
-               <?php } ?>
+              <?php } ?>
               <li id="topNavLogout"><a href="logout.php"> <i class="glyphicon glyphicon-log-out"></i> Logout</a></li>
             </ul>
           </li>
@@ -76,39 +94,52 @@ $companyName = $logoData[1];
               <a href="adminDashboard.php?o=manage" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>Dashboard</a>
             </li>
             <li>
-              <a href="package.php" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>Package</a>
+              <a href="package.php" class="waves-effect"><i class="fa fa-gift fa-fw" aria-hidden="true"></i>Package</a>
             </li>
             <li>
-              <a href="companyDetails.php?o=manage" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>Company</a>
+              <a href="companyDetails.php?o=manage" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i>Company</a>
             </li>
           <?php } else { ?>
             <li style="padding: 70px 0 0;">
               <a href="dashboard.php" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>Dashboard</a>
             </li>
-            <li>
-              <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Users</a>
-              <ul class="dropdown-menu">
-                <li id="topNavAddOrder"><a href="userDetails.php?o=add"> <i class="glyphicon glyphicon-plus"></i> Add User</a></li>
-                <li id="topNavManageOrder"><a href="userDetails.php?o=manage"> <i class="glyphicon glyphicon-edit"></i> Manage User</a></li>
-                <li id="topNavManageOrder"><a href="userDetails.php?o=bank"> <i class="glyphicon glyphicon-piggy-bank"></i> Bank Details</a></li>
-              </ul>
-            </li>
-            <li>
-              <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="waves-effect"><i class="fa fa-columns fa-fw" aria-hidden="true"></i>Orders</a>
-              <ul class="dropdown-menu">
-                <li id="topNavAddOrder"><a href="orders.php?o=add"> <i class="glyphicon glyphicon-plus"></i> Add Orders</a></li>
-                <li id="topNavManageOrder"><a href="orders.php?o=manord"> <i class="glyphicon glyphicon-edit"></i> Manage Orders</a></li>
-              </ul>
-            </li>
-            <?php if ($_SESSION['role'] == 1) { ?>
+            <?php if ($_SESSION['role'] == 1 || $orderAccess) { ?>
+              <li>
+                <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="waves-effect"><i class="fa fa-columns fa-fw" aria-hidden="true"></i>Orders</a>
+                <ul class="dropdown-menu">
+                  <li id="topNavAddOrder"><a href="orders.php?o=add"> <i class="glyphicon glyphicon-plus"></i> Add Orders</a></li>
+                  <li id="topNavManageOrder"><a href="orders.php?o=manord"> <i class="glyphicon glyphicon-edit"></i> Manage Orders</a></li>
+                </ul>
+              </li>
+            <?php }
+              if ($_SESSION['role'] == 1 || $userAccess) { ?>
+              <li>
+                <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Users</a>
+                <ul class="dropdown-menu">
+                  <li id="topNavAddOrder"><a href="userDetails.php?o=add"> <i class="glyphicon glyphicon-plus"></i> Add User</a></li>
+                  <li id="topNavManageOrder"><a href="userDetails.php?o=manage"> <i class="glyphicon glyphicon-edit"></i> Manage User</a></li>
+                  <li id="topNavManageOrder"><a href="userDetails.php?o=bank"> <i class="glyphicon glyphicon-piggy-bank"></i> Bank Details</a></li>
+                </ul>
+              </li>
+            <?php }
+              if ($_SESSION['role'] == 1 || $brandAccess) { ?>
               <li>
                 <a href="brand.php" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i>Brand</a>
               </li>
+            <?php }
+              if ($_SESSION['role'] == 1 || $catogoryAccess) { ?>
               <li>
                 <a href="categories.php" class="waves-effect"><i class="fa fa-font fa-fw" aria-hidden="true"></i>Category</a>
               </li>
+            <?php }
+              if ($_SESSION['role'] == 1 || $productAccess) { ?>
               <li>
                 <a href="product.php" class="waves-effect"><i class="fa fa-globe fa-fw" aria-hidden="true"></i>Product</a>
+              </li>
+            <?php }
+              if ($_SESSION['role'] == 1) { ?>
+              <li>
+                <a href="permission.php" class="waves-effect"><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>Permission</a>
               </li>
           <?php }
           } ?>

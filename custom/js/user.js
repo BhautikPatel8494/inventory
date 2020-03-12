@@ -54,7 +54,7 @@ $(document).ready(function() {
         $("#username")
           .closest(".form-group")
           .addClass("has-success");
-      } 
+      }
 
       if (pancard == "") {
         $("#pancard").after(
@@ -67,7 +67,7 @@ $(document).ready(function() {
         $("#pancard")
           .closest(".form-group")
           .addClass("has-success");
-      } 
+      }
 
       if (building_no == "") {
         $("#building_no").after(
@@ -80,7 +80,7 @@ $(document).ready(function() {
         $("#building_no")
           .closest(".form-group")
           .addClass("has-success");
-      } 
+      }
 
       if (street_name == "") {
         $("#street_name").after(
@@ -93,7 +93,7 @@ $(document).ready(function() {
         $("#street_name")
           .closest(".form-group")
           .addClass("has-success");
-      } 
+      }
 
       if (landmark == "") {
         $("#landmark").after(
@@ -106,7 +106,7 @@ $(document).ready(function() {
         $("#landmark")
           .closest(".form-group")
           .addClass("has-success");
-      } 
+      }
 
       if (pincode == "") {
         $("#pincode").after(
@@ -119,7 +119,7 @@ $(document).ready(function() {
         $("#pincode")
           .closest(".form-group")
           .addClass("has-success");
-      } 
+      }
 
       if (city == "") {
         $("#city").after(
@@ -132,7 +132,7 @@ $(document).ready(function() {
         $("#city")
           .closest(".form-group")
           .addClass("has-success");
-      } 
+      }
 
       if (state == "") {
         $("#state").after(
@@ -145,7 +145,7 @@ $(document).ready(function() {
         $("#state")
           .closest(".form-group")
           .addClass("has-success");
-      } 
+      }
 
       if (country == "") {
         $("#country").after(
@@ -158,7 +158,7 @@ $(document).ready(function() {
         $("#country")
           .closest(".form-group")
           .addClass("has-success");
-      } 
+      }
 
       if (mobile == "") {
         $("#mobile").after(
@@ -171,7 +171,7 @@ $(document).ready(function() {
         $("#mobile")
           .closest(".form-group")
           .addClass("has-success");
-      } 
+      }
 
       if (bank_name == "") {
         $("#bank_name").after(
@@ -184,7 +184,7 @@ $(document).ready(function() {
         $("#bank_name")
           .closest(".form-group")
           .addClass("has-success");
-      } 
+      }
 
       if (ifsc_code == "") {
         $("#ifsc_code").after(
@@ -197,7 +197,7 @@ $(document).ready(function() {
         $("#ifsc_code")
           .closest(".form-group")
           .addClass("has-success");
-      } 
+      }
 
       if (account_name == "") {
         $("#account_name").after(
@@ -210,7 +210,7 @@ $(document).ready(function() {
         $("#account_name")
           .closest(".form-group")
           .addClass("has-success");
-      } 
+      }
 
       if (branch_name == "") {
         $("#branch_name").after(
@@ -223,7 +223,7 @@ $(document).ready(function() {
         $("#branch_name")
           .closest(".form-group")
           .addClass("has-success");
-      } 
+      }
 
       if (account_no == "") {
         $("#account_no").after(
@@ -236,7 +236,7 @@ $(document).ready(function() {
         $("#account_no")
           .closest(".form-group")
           .addClass("has-success");
-      } 
+      }
 
       if (email == "") {
         $("#email").after(
@@ -249,7 +249,7 @@ $(document).ready(function() {
         $("#email")
           .closest(".form-group")
           .addClass("has-success");
-      } 
+      }
 
       if (password == "") {
         $("#password").after(
@@ -262,7 +262,7 @@ $(document).ready(function() {
         $("#password")
           .closest(".form-group")
           .addClass("has-success");
-      } 
+      }
 
       if (cpassword == "") {
         $("#cpassword").after(
@@ -275,7 +275,7 @@ $(document).ready(function() {
         $("#cpassword")
           .closest(".form-group")
           .addClass("has-success");
-      } 
+      }
 
       if (password != cpassword) {
         $("#cpassword").after(
@@ -288,7 +288,7 @@ $(document).ready(function() {
         $("#cpassword")
           .closest(".form-group")
           .addClass("has-success");
-      } 
+      }
 
       if (
         username &&
@@ -310,27 +310,99 @@ $(document).ready(function() {
         password &&
         cpassword
       ) {
-        if (validateProduct == true && validateQuantity == true) {
+        $.ajax({
+          url: form.attr("action"),
+          type: form.attr("method"),
+          data: form.serialize(),
+          dataType: "json",
+          success: function(response) {
+            console.log(response);
+            if (response.success == true) {
+              // create order button
+              $(".success-messages").html(
+                '<div class="alert alert-success">' +
+                  '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
+                  '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> ' +
+                  response.messages +
+                  "</div>"
+              );
 
-          $.ajax({
-            url: form.attr("action"),
-            type: form.attr("method"),
-            data: form.serialize(),
-            dataType: "json",
-            success: function(response) {
-              console.log(response);
-              $("#createOrderBtn").button("reset");
+              $("html, body, div.panel, div.pane-body").animate(
+                { scrollTop: "0px" },
+                100
+              );
 
-              $(".text-danger").remove();
-              $(".form-group")
-                .removeClass("has-error")
-                .removeClass("has-success");
-
+              // disabled te modal footer button
+              $(".editButtonFooter").addClass("div-hide");
+              // remove the product row
+              $(".removeProductRowBtn").addClass("div-hide");
+            } else {
+              alert(response.messages);
             }
-          });
-        }
+          }
+        });
       }
       return false;
     });
-
 });
+
+function removeUser(userId = null) {
+  if (userId) {
+    $("#removeProductBtn")
+      .unbind("click")
+      .bind("click", function() {
+        $("#removeProductBtn").button("loading");
+        $.ajax({
+          url: "php_action/user/removeUser.php",
+          type: "post",
+          data: { userId: userId },
+          dataType: "json",
+          success: function(response) {
+            $("#removeProductBtn").button("reset");
+            if (response.success == true) {
+              $("#removeUserModal").modal("hide");
+
+              manageUserTable.ajax.reload(null, false);
+
+              $(".remove-messages").html(
+                '<div class="alert alert-success">' +
+                  '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
+                  '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> ' +
+                  response.messages +
+                  "</div>"
+              );
+
+              $(".alert-success")
+                .delay(500)
+                .show(10, function() {
+                  $(this)
+                    .delay(3000)
+                    .hide(10, function() {
+                      $(this).remove();
+                    });
+                });
+            } else {
+              $(".removeProductMessages").html(
+                '<div class="alert alert-success">' +
+                  '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
+                  '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> ' +
+                  response.messages +
+                  "</div>"
+              );
+
+              $(".alert-success")
+                .delay(500)
+                .show(10, function() {
+                  $(this)
+                    .delay(3000)
+                    .hide(10, function() {
+                      $(this).remove();
+                    });
+                });
+            }
+          }
+        });
+        return false;
+      });
+  }
+}

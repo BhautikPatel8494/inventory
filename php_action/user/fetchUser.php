@@ -18,7 +18,7 @@ if ($result->num_rows > 0) {
 		$userid = $row[0];
 		// active 
 		$username = $row[18];
-		$pancard = $row[4];
+		$email = $row[1];
 		$building_no = $row[5];
 		$street_name = $row[6];
 		$landmark = $row[7];
@@ -44,7 +44,7 @@ if ($result->num_rows > 0) {
 		$output['data'][] = array(
 			// name
 			$username,
-			$pancard,
+			$email,
 			$building_no,
 			$street_name,
 			$landmark,

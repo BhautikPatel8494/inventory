@@ -101,7 +101,7 @@
 							<select class="form-control" id="brandName" name="brandName">
 								<option value="">~~SELECT~~</option>
 								<?php
-								$sql = "SELECT brand_id, brand_name, brand_active, brand_status FROM brands WHERE brand_status = 1 AND brand_active = 1 AND company_id = $companyId";
+								$sql = "SELECT brand_id, brand_name, brand_active FROM brands WHERE brand_active = 1 AND company_id = $companyId";
 								$result = $connect->query($sql);
 
 								while ($row = $result->fetch_array()) {
@@ -120,7 +120,7 @@
 							<select type="text" class="form-control" id="categoryName" placeholder="Product Name" name="categoryName">
 								<option value="">~~SELECT~~</option>
 								<?php
-								$sql = "SELECT categories_id, categories_name, categories_active, categories_status FROM categories WHERE categories_status = 1 AND categories_active = 1  AND company_id = $companyId";
+								$sql = "SELECT categories_id, categories_name, categories_active FROM categories WHERE categories_active = 1  AND company_id = $companyId";
 								$result = $connect->query($sql);
 
 								while ($row = $result->fetch_array()) {
@@ -256,7 +256,7 @@
 										<select class="form-control" id="editBrandName" name="editBrandName">
 											<option value="">~~SELECT~~</option>
 											<?php
-											$sql = "SELECT brand_id, brand_name, brand_active, brand_status FROM brands WHERE brand_status = 1 AND brand_active = 1";
+											$sql = "SELECT brand_id, brand_name, brand_active FROM brands WHERE brand_active = 1";
 											$result = $connect->query($sql);
 
 											while ($row = $result->fetch_array()) {
@@ -275,7 +275,7 @@
 										<select type="text" class="form-control" id="editCategoryName" name="editCategoryName">
 											<option value="">~~SELECT~~</option>
 											<?php
-											$sql = "SELECT categories_id, categories_name, categories_active, categories_status FROM categories WHERE categories_status = 1 AND categories_active = 1";
+											$sql = "SELECT categories_id, categories_name, categories_active FROM categories WHERE categories_active = 1";
 											$result = $connect->query($sql);
 
 											while ($row = $result->fetch_array()) {

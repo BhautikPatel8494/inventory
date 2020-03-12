@@ -1,5 +1,9 @@
-<?php require_once 'php_action/db_connect.php' ?>
-<?php require_once 'includes/header.php';
+<?php require_once 'php_action/core.php';
+
+if ($_SESSION['role'] != 3) {
+    header('location: http://localhost/inventory-management-system/index.php');
+}
+require_once 'includes/header.php';
 
 if ($_GET['o'] == 'add') {
     // add order
@@ -189,11 +193,11 @@ if ($_GET['o'] == 'add') {
                 <?php } else if ($_GET['o'] == 'manage') { ?>
                     <div class="remove-messages"></div>
 
-                    <table class="table" id="manageUserTable">
+                    <table class="table" id="manageCompanyTable">
                         <thead>
                             <tr>
                                 <th style="width:10%;">User Name</th>
-                                <th style="width:10%;">Pancard</th>
+                                <th style="width:10%;">Email</th>
                                 <th style="width:10%;">Building No</th>
                                 <th style="width:10%;">Street Name</th>
                                 <th style="width:10%;">Landmark</th>
@@ -202,39 +206,36 @@ if ($_GET['o'] == 'add') {
                                 <th style="width:10%;">State</th>
                                 <th style="width:10%;">Country</th>
                                 <th style="width:10%;">Mobile</th>
+                                <th style="width:10%;">Access</th>
                                 <th style="width:15%;">Options</th>
                             </tr>
                         </thead>
                     </table>
 
-                <?php } else if ($_GET['o'] == 'bank') { ?>
-                    <table class="table" id="manageUserBankDetailsTable">
-                        <thead>
-                            <tr>
-                                <th style="width:10%;">User Name</th>
-                                <th style="width:10%;">Bank Name</th>
-                                <th style="width:10%;">IFSC Code</th>
-                                <th style="width:10%;">Account Name</th>
-                                <th style="width:10%;">Branch Name</th>
-                                <th style="width:10%;">Account No</th>
-                            </tr>
-                        </thead>
-                    </table>
                 <?php } else if ($_GET['o'] == 'edit') { ?>
-                    <form class="form-horizontal" method="POST" action="php_action/user/createUser.php" id="createUserForm">
 
-                        <?php $userId = $_GET['i'];
+                    <?php $userId = $_GET['i'];
 
-                            $sql = "SELECT * FROM user_details WHERE id = {$userId}";
+                        $sql = "SELECT * FROM company_details WHERE id = {$userId}";
 
-                            $result = $connect->query($sql);
-                            $data = $result->fetch_row();
-                            ?>
+                        $result = $connect->query($sql);
+                        $row = $result->fetch_row();
+                        ?>
+
+                    <div class="success-messages"></div>
+                    <form class="form-horizontal" method="POST" action="php_action/company/editCompany.php" id="createCompanyForm">
+
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="subTotal" class="col-sm-3 control-label">Username</label>
+                                <label for="subTotal" class="col-sm-3 control-label">Company Name</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="username" name="username" value="<?php echo $data[3] ?>" />
+                                    <input type="text" class="form-control" id="companyName" name="companyName" value="<?php echo $row[4] ?>" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="subTotal" class="col-sm-3 control-label">Owner Name</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="ownerName" name="ownerName" value="<?php echo $row[18] ?>" />
                                 </div>
                             </div>
                             <!--/form-group-->
@@ -242,59 +243,59 @@ if ($_GET['o'] == 'add') {
 
                             <!--/form-group-->
                             <div class="form-group">
-                                <label for="discount" class="col-sm-3 control-label">Pancard</label>
+                                <label for="discount" class="col-sm-3 control-label">GST no</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="pancard" name="pancard" onkeyup="discountFunc()" autocomplete="off" />
+                                    <input type="text" class="form-control" id="gstin" name="gstin" value="<?php echo $row[3] ?>" autocomplete="off" />
                                 </div>
                             </div>
                             <!--/form-group-->
                             <div class="form-group">
                                 <label for="grandTotal" class="col-sm-3 control-label">Building No</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="building_no" name="building_no" />
+                                    <input type="text" class="form-control" id="building_no" name="building_no" value="<?php echo $row[5] ?>" />
                                 </div>
                             </div>
                             <!--/form-group-->
                             <div class="form-group">
                                 <label for="vat" class="col-sm-3 control-label gst">Street Name</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="street_name" name="street_name" />
+                                    <input type="text" class="form-control" id="street_name" name="street_name" value="<?php echo $row[6] ?>" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="paid" class="col-sm-3 control-label">Landmark</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="landmark" name="landmark" autocomplete="off" />
+                                    <input type="text" class="form-control" id="landmark" name="landmark" autocomplete="off" value="<?php echo $row[7] ?>" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="paid" class="col-sm-3 control-label">Pincode</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="pincode" name="pincode" autocomplete="off" />
+                                    <input type="text" class="form-control" id="pincode" name="pincode" autocomplete="off" value="<?php echo $row[8] ?>" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="paid" class="col-sm-3 control-label">City</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="city" name="city" autocomplete="off" />
+                                    <input type="text" class="form-control" id="city" name="city" autocomplete="off" value="<?php echo $row[9] ?>" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="paid" class="col-sm-3 control-label">State</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="state" name="state" autocomplete="off" />
+                                    <input type="text" class="form-control" id="state" name="state" autocomplete="off" value="<?php echo $row[10] ?>" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="paid" class="col-sm-3 control-label">country</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="country" name="country" autocomplete="off" />
+                                    <input type="text" class="form-control" id="country" name="country" autocomplete="off" value="<?php echo $row[11] ?>" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="paid" class="col-sm-3 control-label">mobile</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="mobile" name="mobile" autocomplete="off" />
+                                    <input type="text" class="form-control" id="mobile" name="mobile" autocomplete="off" value="<?php echo $row[12] ?>" />
                                 </div>
                             </div>
                         </div>
@@ -304,50 +305,64 @@ if ($_GET['o'] == 'add') {
                             <div class="form-group">
                                 <label for="paid" class="col-sm-3 control-label">Bank Name</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="bank_name" name="bank_name" autocomplete="off" />
+                                    <input type="text" class="form-control" id="bank_name" name="bank_name" autocomplete="off" value="<?php echo $row[13] ?>" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="paid" class="col-sm-3 control-label">IFSC Code</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="ifsc_code" name="ifsc_code" autocomplete="off" />
+                                    <input type="text" class="form-control" id="ifsc_code" name="ifsc_code" autocomplete="off" value="<?php echo $row[14] ?>" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="paid" class="col-sm-3 control-label">Account Name</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="account_name" name="account_name" autocomplete="off" />
+                                    <input type="text" class="form-control" id="account_name" name="account_name" autocomplete="off" value="<?php echo $row[15] ?>" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="paid" class="col-sm-3 control-label">Branch Name</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="branch_name" name="branch_name" autocomplete="off" />
+                                    <input type="text" class="form-control" id="branch_name" name="branch_name" autocomplete="off" value="<?php echo $row[16] ?>" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="paid" class="col-sm-3 control-label">Account No</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="account_no" name="account_no" autocomplete="off" />
+                                    <input type="text" class="form-control" id="account_no" name="account_no" autocomplete="off" value="<?php echo $row[17] ?>" />
                                 </div>
-                            </div><br /><br /><br /><br />
+                            </div>
+                            <!-- <div class="form-group">
+                                <label for="productImage" class="col-sm-3 control-label">Product Image: </label>
+                                <label class="col-sm-1 control-label">: </label>
+                                <div class="col-sm-8">
+                                    <div id="kv-avatar-errors-1" class="center-block" style="display:none;"></div>
+                                    <div class="kv-avatar center-block">
+                                        <input type="file" class="form-control" id="productImage" placeholder="Product Name" name="productImage" class="file-loading" style="width:auto;" />
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="productImage" class="col-sm-3 control-label">Product Image: </label>
+                                <label class="col-sm-1 control-label">: </label>
+                                <div class="col-sm-8">
+                                    <div id="kv-avatar-errors-1" class="center-block" style="display:none;"></div>
+                                    <div class="kv-avatar center-block">
+                                        <input type="file" class="form-control" id="productImage" placeholder="Product Name" name="productImage" class="file-loading" style="width:auto;" />
+                                    </div>
+                                </div>
+                            </div> -->
                             <div class="form-group">
                                 <label for="totalAmount" class="col-sm-3 control-label">Email</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="email" name="email" />
+                                    <input type="text" class="form-control" id="email" name="email" value="<?php echo $row[1] ?>" />
                                 </div>
-                            </div>
+                            </div><br /><br /><br /><br />
                             <div class="form-group">
-                                <label for="totalAmount" class="col-sm-3 control-label">Password</label>
-                                <div class="col-sm-9">
-                                    <input type="password" class="form-control" id="password" name="password" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="totalAmount" class="col-sm-3 control-label">Confirm Password</label>
-                                <div class="col-sm-9">
-                                    <input type="password" class="form-control" id="cpassword" name="cpassword" />
-                                </div>
+                                <label for="totalAmount" class="col-sm-3 control-label">Access</label>
+                                <input type="radio" name="access" value='1' <?php echo ($row[22] == 1 ? 'checked="checked"' : ''); ?>>Active
+                                <input type="radio" name="access" value='0' <?php echo ($row[22] == 0 ? 'checked="checked"' : ''); ?>>Block
                             </div>
                         </div>
                         <!--/col-md-6-->
@@ -355,8 +370,8 @@ if ($_GET['o'] == 'add') {
 
                         <div class="form-group submitButtonFooter">
                             <div class="col-sm-offset-2 col-sm-10">
+                                <input type="hidden" name="companyId" id="companyId" value="<?php echo $_GET['i']; ?>" />
                                 <button type="submit" id="addUserModalBtn" data-loading-text="Loading..." class="btn btn-success"><i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
-                                <button type="reset" class="btn btn-default" onclick="resetOrderForm()"><i class="glyphicon glyphicon-erase"></i> Reset</button>
                             </div>
                         </div>
                     </form>
@@ -462,6 +477,6 @@ if ($_GET['o'] == 'add') {
 <!-- /categories brand -->
 
 
-<script src="custom/js/user.js"></script>
+<script src="custom/js/company.js"></script>
 
 <?php require_once 'includes/footer.php'; ?>

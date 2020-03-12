@@ -1,4 +1,12 @@
-<?php require_once 'includes/header.php';
+<?php require_once 'php_action/core.php';
+
+if($_SESSION['role'] != 3) {
+	header('location: http://localhost/inventory-management-system/index.php');
+}
+require_once 'includes/header.php';
+
+
+
 
 $suggationSql = "SELECT * FROM contact LIMIT 5";
 $suggationQuery = $connect->query($suggationSql);
@@ -9,7 +17,7 @@ $companyQuery = $connect->query($company);
 ?>
 
 <div class="row">
-	<br><br><br><br>
+	<br><br>
 	<div class="col-md-4">
 		<div class="card">
 			<div class="cardHeader">

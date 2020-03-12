@@ -24,6 +24,15 @@ if ($companyId != 1) {
 			} else {
 				header('location: http://localhost/inventory-management-system/membership.php');
 			}
+		} else {
+			$accessSql = "SELECT access FROM company_details WHERE id = $companyId";
+			$accessResult = $connect->query($accessSql);
+			$valueForAccess = $accessResult->fetch_assoc();
+			$hasAccess = $valueForAccess['access'];
+			if ($hasAccess == 0) {
+				header('location: http://localhost/inventory-management-system/notFound.php');
+				exit();
+			}
 		}
 	} else {
 		if ($_SESSION['userId']) {

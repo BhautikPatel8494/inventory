@@ -73,7 +73,7 @@ if (isset($_POST["adminSubmit"])) {
 					if (is_uploaded_file($_FILES['logo']['tmp_name'])) {
 						if (move_uploaded_file($_FILES['logo']['tmp_name'], $url1)) {
 
-							$sql1 = "INSERT INTO company_details (email, password, gstno, company_name, building_no, street_name, landmark, pincode, city, state, country, mobile, bank_name, ifsc_code, account_name, branch_name, account_no, name, certificate, logo, token) VALUES ('$email', '$password', '$gst', '$company', '$building', '$street', '$landmark', '$pincode' ,'$city', '$state', '$country', '$mobile' , '$bankName',  '$ifsc', '$accountName', '$branchName', '$accountNo', '$person', '$url', '$url1', '$token')";
+							$sql1 = "INSERT INTO company_details (email, password, gstno, company_name, building_no, street_name, landmark, pincode, city, state, country, mobile, bank_name, ifsc_code, account_name, branch_name, account_no, owner_name, certificate, logo, token, access) VALUES ('$email', '$password', '$gst', '$company', '$building', '$street', '$landmark', '$pincode' ,'$city', '$state', '$country', '$mobile' , '$bankName',  '$ifsc', '$accountName', '$branchName', '$accountNo', '$person', '$url', '$url1', '$token', 1)";
 							if ($connect->query($sql1) === true) {
 								header('location: http://localhost/inventory-management-system/login.php?type=admin');
 							} else {

@@ -5,12 +5,12 @@ require_once '../core.php';
 $valid['success'] = array('success' => false, 'messages' => array());
 
 if ($_POST) {
-	$user_Id = $_POST['userId'];
+	$company_Id = $_POST['companyId'];
 
-	$userName = $_POST['username'];
 	$email = $_POST['email'];
-	// $password = md5($_POST['password']);
-	$pancard = $_POST['pancard'];
+	$gstno = $_POST['gstin'];
+	$companyName = $_POST['companyName'];
+	$ownerName = $_POST['ownerName'];
 	$building = $_POST['building_no'];
 	$street = $_POST['street_name'];
 	$landmark = $_POST['landmark'];
@@ -24,19 +24,18 @@ if ($_POST) {
 	$accountName = $_POST['account_name'];
 	$branchName = $_POST['branch_name'];
 	$accountNo = $_POST['account_no'];
+	$access = $_POST['access'];
 
+	$sql = "UPDATE company_details SET company_name = '$companyName', owner_name = '$ownerName', email = '$email', gstno = '$gstno', building_no = '$building', street_name = '$street', landmark = '$landmark', pincode = '$pincode', city = '$city', state = '$state', country = '$country', mobile = '$mobile', bank_name = '$bankName', ifsc_code = '$ifsc' ,account_name = '$accountName',branch_name = '$branchName' , account_no = '$accountNo', access = $access WHERE id = {$company_Id}";
 
-	$sql = "UPDATE user_details SET name = '$userName', email = '$email', pancard = '$pancard', building_no = '$building', street_name = '$street', landmark = '$landmark', pincode = '$pincode', city = '$city', state = '$state', country = '$country', mobile = '$mobile', bank_name = '$bankName', ifsc_code = '$ifsc' ,account_name = '$accountName',branch_name = '$branchName' , account_no = '$accountNo' WHERE id = {$user_Id}";
 	if ($connect->query($sql) === TRUE) {
 		$valid['success'] = true;
 		$valid['messages'] = "Successfully Update";
-
-		// header('location: http://localhost/inventory-management-system/userDetails.php?o=manage');
 	} else {
 		$valid['success'] = false;
 		$valid['messages'] = "Error while updating product info";
 	}
-	
+
 	$connect->close();
 
 	echo json_encode($valid);

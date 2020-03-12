@@ -1,5 +1,11 @@
-<?php require_once 'php_action/db_connect.php' ?>
-<?php require_once 'includes/header.php'; ?>
+<?php require_once 'php_action/core.php';
+
+if ($_SESSION['role'] != 3) {
+    header('location: http://localhost/inventory-management-system/index.php');
+}
+require_once 'includes/header.php';
+
+?>
 
 <div class="row">
     <div class="col-md-12">
@@ -73,7 +79,7 @@
                         <label for="rate" class="col-sm-3 control-label">Facilities: </label>
                         <label class="col-sm-1 control-label">: </label>
                         <div class="col-sm-8">
-                        <textarea class="form-control" id="discription" placeholder="Facilities" name="discription" autocomplete="off" rows="4" cols="50"></textarea>
+                            <textarea class="form-control" id="discription" placeholder="Facilities" name="discription" autocomplete="off" rows="4" cols="50"></textarea>
                         </div>
                     </div>
                 </div>
@@ -99,7 +105,7 @@
                 <h4 class="modal-title"><i class="fa fa-edit"></i> Edit Package</h4>
             </div>
             <div class="modal-body" style="max-height:450px; overflow:auto;">
-
+                <div id="edit-package-messages"></div>
                 <div class="div-loading">
                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                     <span class="sr-only">Loading...</span>
@@ -107,9 +113,9 @@
 
                 <div class="div-result">
                     <div class="tab-content">
-                        <form class="form-horizontal" id="editProductForm" action="php_action/package/editPackage.php" method="POST">
+                        <form class="form-horizontal" id="editPackageForm" action="php_action/package/editPackage.php" method="POST">
 
-                            <div id="edit-product-messages"></div>
+                            <div id="edit-package-messages"></div>
 
                             <div class="form-group">
                                 <label for="editPackageName" class="col-sm-3 control-label">Package Name: </label>

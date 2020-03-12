@@ -5,15 +5,13 @@ require_once '../core.php';
 
 $valid['success'] = array('success' => false, 'messages' => array());
 
-$orderId = $_POST['orderId'];
+$userId = $_POST['userId'];
 
-if($orderId) { 
+if($userId) { 
 
- $sql = "DELETE FROM orders WHERE order_id = {$orderId}";
+$sql = "DELETE FROM user_details WHERE id = {$userId} AND company_id = {$companyId}";
 
- $orderItem = "DELETE FROM order_item WHERE  order_id = {$orderId}";
-
- if($connect->query($sql) === TRUE && $connect->query($orderItem) === TRUE) {
+ if($connect->query($sql) === TRUE) {
  	$valid['success'] = true;
 	$valid['messages'] = "Successfully Removed";		
  } else {

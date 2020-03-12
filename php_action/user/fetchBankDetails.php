@@ -20,6 +20,7 @@ if ($result->num_rows > 0) {
 		$userid = $row[0];
 		// active 
 		$username = $row[18];
+		$email = $row[1];
 		$bankName = $row[13];
 		$ifsc_code = $row[14];
 		$account_name = $row[15];
@@ -29,6 +30,7 @@ if ($result->num_rows > 0) {
 		$output['data'][] = array(
 			// name
 			$username,
+			$email,
 			$bankName,
 			$ifsc_code,
 			$account_name,

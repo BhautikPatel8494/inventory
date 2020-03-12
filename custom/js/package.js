@@ -161,14 +161,14 @@ function editPackage(packageId = null) {
         $("#editRate").val(response.rate);
         $("#editDiscription").val(response.description);
 
-        $("#editProductForm")
+        $("#editPackageForm")
           .unbind("submit")
           .bind("submit", function() {
             var packageName = $("#editPackageName").val();
             var rate = $("#editRate").val();
             var discription = $("#editDiscription").val();
 
-            if (productName == "") {
+            if (packageName == "") {
               $("#editPackageName").after(
                 '<p class="text-danger">Package Name field is required</p>'
               );
@@ -243,7 +243,7 @@ function editPackage(packageId = null) {
                       .removeClass("has-error")
                       .removeClass("has-success");
 
-                    $("#edit-product-messages").html(
+                    $("#edit-package-messages").html(
                       '<div class="alert alert-success">' +
                         '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
                         '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> ' +

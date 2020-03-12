@@ -6,20 +6,19 @@ $valid['success'] = array('success' => false, 'messages' => array());
 
 if ($_POST) {
 
-	$brandName = $_POST['brandName'];
-	$brandStatus = $_POST['brandStatus'];
-	
+    $userId = $_POST['userId'];
+	$status = $_POST['status'];
+	$type = $_POST['type'];
 
-	$sql = "INSERT INTO brands (company_id, brand_name, brand_active) VALUES ($companyId,'$brandName', '$brandStatus')";
+	$sql = "UPDATE permission SET $type = $status WHERE user_id = $userId AND company_id = $companyId";
 
 	if ($connect->query($sql) === TRUE) {
 		$valid['success'] = true;
-		$valid['messages'] = "Successfully Added";
+		$valid['messages'] = "Successfully Updated";
 	} else {
 		$valid['success'] = false;
 		$valid['messages'] = "Error while adding the members";
 	}
-
 
 	$connect->close();
 

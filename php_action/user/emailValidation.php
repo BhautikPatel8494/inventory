@@ -7,7 +7,12 @@ $valid['success'] = array('success' => false, 'messages' => array());
 $email = $_POST['email'];
 
 if ($email) {
-    $sql = "SELECT email FROM user_details WHERE email = '$email'";
+    $sql = "SELECT email 
+    FROM (
+        SELECT email AS email FROM user_details
+        UNION ALL
+        SELECT email FROM company_details
+    ) a WHERE email = '$email'";
     $checkResult = $connect->query($sql);
 
     if ($checkResult->num_rows > 0) {

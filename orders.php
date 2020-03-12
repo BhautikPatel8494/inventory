@@ -110,7 +110,7 @@ if ($_GET['o'] == 'add') {
 										<select class="form-control" name="productName[]" id="productName<?php echo $x; ?>" onchange="getProductData(<?php echo $x; ?>)">
 											<option value="">~~SELECT~~</option>
 											<?php
-													$productSql = "SELECT * FROM product WHERE active = 1 AND status = 1 AND quantity != 0 AND company_id = $companyId";
+													$productSql = "SELECT * FROM product WHERE active = 1 AND quantity != 0 AND company_id = $companyId";
 													$productData = $connect->query($productSql);
 
 													while ($row = $productData->fetch_array()) {
@@ -292,7 +292,7 @@ if ($_GET['o'] == 'add') {
 
 				<?php $orderId = $_GET['i'];
 
-					$sql = "SELECT orders.order_id, orders.order_date, orders.client_name, orders.client_contact, orders.sub_total, orders.vat, orders.total_amount, orders.discount, orders.grand_total, orders.paid, orders.due, orders.payment_type, orders.payment_status,orders.payment_place,orders.gstn FROM orders 	
+					$sql = "SELECT orders.order_id, orders.order_date, orders.client_name, orders.client_contact, orders.sub_total, orders.vat, orders.total_amount, orders.discount, orders.grand_total, orders.paid, orders.due, orders.payment_type, orders.payment_status,orders.payment_place,orders.gstn,orders.user_id FROM orders 	
 					WHERE orders.order_id = {$orderId}";
 
 					$result = $connect->query($sql);
@@ -353,7 +353,7 @@ if ($_GET['o'] == 'add') {
 										<select class="form-control" name="productName[]" id="productName<?php echo $x; ?>" onchange="getProductData(<?php echo $x; ?>)">
 											<option value="">~~SELECT~~</option>
 											<?php
-													$productSql = "SELECT * FROM product WHERE active = 1 AND status = 1 AND quantity != 0";
+													$productSql = "SELECT * FROM product WHERE active = 1 AND quantity != 0";
 													$productData = $connect->query($productSql);
 
 													while ($row = $productData->fetch_array()) {
@@ -378,7 +378,7 @@ if ($_GET['o'] == 'add') {
 								<td style="padding-left:20px;">
 									<div class="form-group">
 										<?php
-												$productSql = "SELECT * FROM product WHERE active = 1 AND status = 1 AND quantity != 0";
+												$productSql = "SELECT * FROM product WHERE active = 1 AND quantity != 0";
 												$productData = $connect->query($productSql);
 
 												while ($row = $productData->fetch_array()) {
@@ -545,6 +545,7 @@ if ($_GET['o'] == 'add') {
 						<button type="button" class="btn btn-default" onclick="addRow()" id="addRowBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-plus-sign"></i> Add Row </button>
 
 						<input type="hidden" name="orderId" id="orderId" value="<?php echo $_GET['i']; ?>" />
+						<input type="hidden" name="userId" id="userId" value="<?php echo $data[15]  ?>" />
 
 						<button type="submit" id="editOrderBtn" data-loading-text="Loading..." class="btn btn-success"><i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
 

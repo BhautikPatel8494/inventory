@@ -2,7 +2,7 @@
 
 require_once '../core.php';
 
-$sql = "SELECT product_id, product_name FROM product WHERE status = 1 AND active = 1 AND company_id = $companyId";
+$sql = "SELECT product_id, product_name FROM product WHERE active = 1 AND company_id = $companyId";
 $result = $connect->query($sql);
 
 $data = $result->fetch_all();

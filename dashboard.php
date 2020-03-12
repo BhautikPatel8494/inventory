@@ -1,10 +1,6 @@
-<?php require_once 'includes/header.php'; ?>
+<?php require_once 'includes/header.php';
 
-<?php
-
-
-
-$sql = "SELECT * FROM product WHERE status = 1 AND company_id = $companyId";
+$sql = "SELECT * FROM product WHERE company_id = $companyId";
 $query = $connect->query($sql);
 $countProduct = $query->num_rows;
 
@@ -12,7 +8,7 @@ $userSql = "SELECT * FROM user_details WHERE company_id = $companyId";
 $userQuery = $connect->query($userSql);
 $countUsers = $userQuery->num_rows;
 
-$orderSql = "SELECT * FROM orders WHERE order_status = 1 AND company_id = $companyId";
+$orderSql = "SELECT * FROM orders WHERE company_id = $companyId";
 $orderQuery = $connect->query($orderSql);
 $countOrder = $orderQuery->num_rows;
 
@@ -21,18 +17,23 @@ while ($orderResult = $orderQuery->fetch_assoc()) {
 	$totalRevenue += $orderResult['paid'];
 }
 
-$lowStockSql = "SELECT * FROM product WHERE quantity <= 5 AND status = 1 AND company_id = $companyId";
+$lowStockSql = "SELECT * FROM product WHERE quantity <= 5 AND company_id = $companyId";
 $lowStockQuery = $connect->query($lowStockSql);
 $countLowStock = $lowStockQuery->num_rows;
 
-$userwisesql = "SELECT user_details.name , SUM(orders.grand_total) as totalorder FROM orders INNER JOIN user_details ON orders.user_id = user_details.id WHERE orders.order_status = 1 AND orders.company_id = $companyId GROUP BY orders.user_id";
+$userwisesql = "SELECT user_details.name , COUNT(orders.grand_total) AS count, SUM(orders.grand_total) as totalorder FROM orders INNER JOIN user_details ON orders.user_id = user_details.id WHERE orders.company_id = $companyId GROUP BY orders.user_id  ORDER BY totalorder ASC LIMIT 5";
 $userwiseQuery = $connect->query($userwisesql);
 $userwieseOrder = $userwiseQuery->num_rows;
 
-$adminsql = "SELECT SUM(grand_total) AS value_sum FROM orders WHERE company_id = $companyId AND user_id = 0";
+// $productWisesql = "SELECT product.product_name , SUM(order_item.total) as totalorderItem FROM order_item INNER JOIN product ON order_item.product_id = product.product_id WHERE product.company_id = $companyId GROUP BY order_item.product_id";
+// $productWiseQuery = $connect->query($productWisesql);
+// $productWiseOrder = $productWiseQuery->num_rows;
+
+$adminsql = "SELECT COUNT(grand_total) AS totalCount, SUM(grand_total) AS value_sum FROM orders WHERE company_id = $companyId AND user_id = 0";
 $adminQuery = $connect->query($adminsql);
-while($record = $adminQuery->fetch_array()){
-    $total = $record['value_sum'];
+while ($record = $adminQuery->fetch_array()) {
+	$total = $record['value_sum'];
+	$totalCount = $record['totalCount'];
 }
 
 $connect->close();
@@ -49,6 +50,7 @@ $connect->close();
 <!-- fullCalendar 2.2.5-->
 <link rel="stylesheet" href="assests/plugins/fullcalendar/fullcalendar.min.css">
 <link rel="stylesheet" href="assests/plugins/fullcalendar/fullcalendar.print.css" media="print">
+<script type="text/javascript" src="assests/chart/Chart.min.js"></script>
 
 
 <div class="row">
@@ -102,8 +104,6 @@ $connect->close();
 
 	<!--/col-md-4-->
 
-
-
 	<div class="col-md-4">
 		<div class="card">
 			<div class="cardHeader">
@@ -114,8 +114,9 @@ $connect->close();
 				<p><?php echo date('l') . ' ' . date('d') . ', ' . date('Y'); ?></p>
 			</div>
 		</div>
-		<br />
+	</div>
 
+	<div class="col-md-4">
 		<div class="card">
 			<div class="cardHeader" style="background-color:#245580;">
 				<h1><?php if ($totalRevenue) {
@@ -129,11 +130,12 @@ $connect->close();
 				<p> INR Total Revenue</p>
 			</div>
 		</div>
-		<br />
+	</div>
 
+	<div class="col-md-4">
 		<?php if ($_SESSION['role'] == 1) { ?>
 			<div class="card">
-				<div class="cardHeader" style="background-color:#245580;">
+				<div class="cardHeader" style="background-color:#766060;">
 					<h1><?php if ($countUsers) {
 								echo $countUsers;
 							} else {
@@ -148,26 +150,33 @@ $connect->close();
 		<?php  } ?>
 	</div>
 
+
+
+
 	<?php if ($_SESSION['role'] == 1) { ?>
-		<div class="col-md-8">
+		<div class="col-md-12">
+		<br><br>
 			<div class="panel panel-default">
-				<div class="panel-heading"> <i class="glyphicon glyphicon-calendar"></i> User Wise Order</div>
+				<div class="panel-heading"> <i class="glyphicon glyphicon-calendar"></i> Top Selling </div>
 				<div class="panel-body">
 					<table class="table" id="productTable">
 						<thead>
 							<tr>
 								<th style="width:40%;">Name</th>
+								<th style="width:20%;">Total order</th>
 								<th style="width:20%;">Orders in Rupees</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
 								<td> You </td>
+								<td> <?php echo $totalCount ? $totalCount : 0 ?> </td>
 								<td> <?php echo $total ? $total : 0 ?>
 							</tr>
 							<?php while ($orderResult = $userwiseQuery->fetch_assoc()) { ?>
 								<tr>
 									<td><?php echo $orderResult['name'] ?></td>
+									<td><?php echo $orderResult['count'] ?></td>
 									<td><?php echo $orderResult['totalorder'] ?></td>
 								</tr>
 							<?php } ?>
@@ -175,6 +184,53 @@ $connect->close();
 					</table>
 					<!--<div id="calendar"></div>-->
 				</div>
+			</div>
+			<div class="panel panel-default">
+				<div id="chart-container">
+					<canvas id="graphCanvas"></canvas>
+				</div>
+
+				<script>
+					$(document).ready(function() {
+						showGraph();
+					});
+
+
+					function showGraph() {
+						{
+							$.post("php_action/chart/salesChart.php",
+								function(data) {
+									var data1 = JSON.parse(data)
+									var name = [];
+									var marks = [];
+
+									for (var i in data1) {
+										name.push(data1[i].product_name);
+										marks.push(data1[i].totalorderItem);
+									}
+
+									var chartdata = {
+										labels: name,
+										datasets: [{
+											label: 'Order',
+											backgroundColor: '#49e2ff',
+											borderColor: '#46d5f1',
+											hoverBackgroundColor: '#CCCCCC',
+											hoverBorderColor: '#666666',
+											data: marks
+										}]
+									};
+
+									var graphTarget = $("#graphCanvas");
+
+									var barGraph = new Chart(graphTarget, {
+										type: 'bar',
+										data: chartdata
+									});
+								});
+						}
+					}
+				</script>
 			</div>
 		</div>
 	<?php  } ?>

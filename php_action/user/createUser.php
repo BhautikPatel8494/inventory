@@ -24,18 +24,15 @@ if ($_POST) {
 	$branchName = $_POST['branch_name'];
 	$accountNo = $_POST['account_no'];
 
-		$sql1 = "INSERT INTO user_details (email, password, company_id, pancard, building_no, street_name, landmark, pincode, city, state, country, mobile, bank_name, ifsc_code, account_name, branch_name, account_no, name) VALUES ('$email', '$password', $companyId,  '$pancard', '$building', '$street', '$landmark', '$pincode' ,'$city', '$state', '$country', '$mobile' , '$bankName',  '$ifsc', '$accountName', '$branchName', '$accountNo', '$username')";
-		if ($connect->query($sql1) === TRUE) {
-			$valid['success'] = true;
-			$valid['messages'] = "Successfully Added";
+	$sql1 = "INSERT INTO user_details (email, password, company_id, pancard, building_no, street_name, landmark, pincode, city, state, country, mobile, bank_name, ifsc_code, account_name, branch_name, account_no, name) VALUES ('$email', '$password', $companyId,  '$pancard', '$building', '$street', '$landmark', '$pincode' ,'$city', '$state', '$country', '$mobile' , '$bankName',  '$ifsc', '$accountName', '$branchName', '$accountNo', '$username')";
+	if ($connect->query($sql1) === TRUE) {
+		$valid['success'] = true;
+		$valid['messages'] = "Successfully Added";
+	} else {
+		$valid['success'] = false;
+		$valid['messages'] = "Error while adding the members";
+	} // /else	
 
-			header('location: http://localhost/inventory-management-system/userDetails.php?o=manage');
-
-			$connect->close();
-			echo json_encode($valid);
-		} else {
-			$valid['success'] = false;
-			$valid['messages'] = "Error while adding the members";
-		}// /else	
-
+	$connect->close();
+	echo json_encode($valid);
 } // if in_array 		

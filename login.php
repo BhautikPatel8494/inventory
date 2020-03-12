@@ -174,7 +174,7 @@ if (isset($_POST["userSubmit"])) {
                                                 Forgot
                                             </span>
 
-                                            <a href="#" class="txt2">
+                                            <a href="resetPassword.php" class="txt2">
                                                 Username / Password?
                                             </a>
 
