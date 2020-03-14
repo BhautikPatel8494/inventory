@@ -13,8 +13,21 @@ $orderQuery = $connect->query($orderSql);
 $countOrder = $orderQuery->num_rows;
 
 $totalRevenue = 0;
+$panding = 0;
 while ($orderResult = $orderQuery->fetch_assoc()) {
 	$totalRevenue += $orderResult['paid'];
+	$panding += $orderResult['due'];
+}
+
+$purchaseorderSql = "SELECT * FROM purchase_order WHERE company_id = $companyId";
+$purchaseOrderQuery = $connect->query($purchaseorderSql);
+$countOrder = $purchaseOrderQuery->num_rows;
+
+$totalExpence = 0;
+$pandingExpense = 0;
+while ($purchaseOrderResult = $purchaseOrderQuery->fetch_assoc()) {
+	$totalExpence += $purchaseOrderResult['paid'];
+	$pandingExpense += $purchaseOrderResult['due'];
 }
 
 $lowStockSql = "SELECT * FROM product WHERE quantity <= 5 AND company_id = $companyId";
@@ -28,6 +41,11 @@ $userwieseOrder = $userwiseQuery->num_rows;
 // $productWisesql = "SELECT product.product_name , SUM(order_item.total) as totalorderItem FROM order_item INNER JOIN product ON order_item.product_id = product.product_id WHERE product.company_id = $companyId GROUP BY order_item.product_id";
 // $productWiseQuery = $connect->query($productWisesql);
 // $productWiseOrder = $productWiseQuery->num_rows;
+
+$dateWisesql = "SELECT SUM(orders.grand_total) as totalorder,orders.order_date  FROM orders WHERE orders.company_id = $companyId GROUP BY orders.order_date;";
+$dateWiseQuery = $connect->query($dateWisesql);
+$dateWiseOrder = $dateWiseQuery->num_rows;
+
 
 $adminsql = "SELECT COUNT(grand_total) AS totalCount, SUM(grand_total) AS value_sum FROM orders WHERE company_id = $companyId AND user_id = 0";
 $adminQuery = $connect->query($adminsql);
@@ -148,14 +166,63 @@ $connect->close();
 				</div>
 			</div>
 		<?php  } ?>
+		<br><br>
+	</div>
+
+	<div class="col-md-4">
+		<div class="card">
+			<div class="cardHeader" style="background-color:#245580;">
+				<h1><?php if ($panding) {
+						echo $panding;
+					} else {
+						echo '0';
+					} ?></h1>
+			</div>
+
+			<div class="cardContainer" style="background-color: white;">
+				<p> Panding Money</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-4">
+		<div class="card">
+			<div class="cardHeader" style="background-color:#245580;">
+				<h1><?php if ($totalExpence) {
+						echo $totalExpence;
+					} else {
+						echo '0';
+					} ?></h1>
+			</div>
+
+			<div class="cardContainer" style="background-color: white;">
+				<p> Total Expence </p>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-4">
+		<div class="card">
+			<div class="cardHeader" style="background-color:#245580;">
+				<h1><?php if ($pandingExpense) {
+						echo $pandingExpense;
+					} else {
+						echo '0';
+					} ?></h1>
+			</div>
+
+			<div class="cardContainer" style="background-color: white;">
+				<p> Panding Expence </p>
+			</div>
+		</div>
 	</div>
 
 
 
 
 	<?php if ($_SESSION['role'] == 1) { ?>
-		<div class="col-md-12">
-		<br><br>
+		<div class="col-md-6">
+			<br><br>
 			<div class="panel panel-default">
 				<div class="panel-heading"> <i class="glyphicon glyphicon-calendar"></i> Top Selling </div>
 				<div class="panel-body">
@@ -185,56 +252,59 @@ $connect->close();
 					<!--<div id="calendar"></div>-->
 				</div>
 			</div>
+		</div>
+		<div class="col-md-6">
+			<br><br>
 			<div class="panel panel-default">
-				<div id="chart-container">
-					<canvas id="graphCanvas"></canvas>
+				<div class="panel-heading"> <i class="glyphicon glyphicon-calendar"></i> Top Selling </div>
+				<div class="panel-body">
+					<table class="table" id="productTable">
+						<thead>
+							<tr>
+								<th style="width:40%;">Name</th>
+								<th style="width:20%;">Total order</th>
+								<th style="width:20%;">Orders in Rupees</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td> You </td>
+								<td> <?php echo $totalCount ? $totalCount : 0 ?> </td>
+								<td> <?php echo $total ? $total : 0 ?>
+							</tr>
+							<?php while ($orderResult = $userwiseQuery->fetch_assoc()) { ?>
+								<tr>
+									<td><?php echo $orderResult['name'] ?></td>
+									<td><?php echo $orderResult['count'] ?></td>
+									<td><?php echo $orderResult['totalorder'] ?></td>
+								</tr>
+							<?php } ?>
+						</tbody>
+					</table>
+					<!--<div id="calendar"></div>-->
 				</div>
-
-				<script>
-					$(document).ready(function() {
-						showGraph();
-					});
-
-
-					function showGraph() {
-						{
-							$.post("php_action/chart/salesChart.php",
-								function(data) {
-									var data1 = JSON.parse(data)
-									var name = [];
-									var marks = [];
-
-									for (var i in data1) {
-										name.push(data1[i].product_name);
-										marks.push(data1[i].totalorderItem);
-									}
-
-									var chartdata = {
-										labels: name,
-										datasets: [{
-											label: 'Order',
-											backgroundColor: '#49e2ff',
-											borderColor: '#46d5f1',
-											hoverBackgroundColor: '#CCCCCC',
-											hoverBorderColor: '#666666',
-											data: marks
-										}]
-									};
-
-									var graphTarget = $("#graphCanvas");
-
-									var barGraph = new Chart(graphTarget, {
-										type: 'bar',
-										data: chartdata
-									});
-								});
-						}
-					}
-				</script>
 			</div>
 		</div>
 	<?php  } ?>
 
+	<div class="col-md-12">
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-heading"> <i class="glyphicon glyphicon-calendar"></i> Day Wise Selling Report </div>
+				<div class="panel-body">
+					<div class="card-body"><canvas id="graphCanvas" width="100%" height="50"></canvas></div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-heading"> <i class="glyphicon glyphicon-calendar"></i> Product Report </div>
+				<div class="panel-body">
+					<div class="card-body"><canvas id="pieChart" width="100%" height="50"></canvas></div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <!--/row-->
 
@@ -244,6 +314,103 @@ $connect->close();
 
 
 <script type="text/javascript">
+	$(document).ready(function() {
+		showSalesGraph();
+		showProductGraph();
+	});
+
+
+	function showSalesGraph() {
+		$.post("php_action/chart/salesChart.php",
+			function(data) {
+				var data1 = JSON.parse(data)
+				var label = [];
+				var sale = [];
+
+				for (var i in data1) {
+					label.push(data1[i].order_date);
+					sale.push(data1[i].totalorderItem);
+				}
+
+				var graphTarget = $("#graphCanvas");
+
+				var barGraph = new Chart(graphTarget, {
+					type: 'line',
+					data: {
+						labels: label,
+						datasets: [{
+							label: "Sale",
+							lineTension: 0.3,
+							backgroundColor: "rgba(2,117,216,0.2)",
+							borderColor: "rgba(2,117,216,1)",
+							pointRadius: 5,
+							pointBackgroundColor: "rgba(2,117,216,1)",
+							pointBorderColor: "rgba(255,255,255,0.8)",
+							pointHoverRadius: 5,
+							pointHoverBackgroundColor: "rgba(2,117,216,1)",
+							pointHitRadius: 50,
+							pointBorderWidth: 2,
+							data: sale,
+						}],
+					},
+					options: {
+						scales: {
+							xAxes: [{
+								time: {
+									unit: 'date'
+								},
+								gridLines: {
+									display: false
+								},
+								ticks: {
+									maxTicksLimit: 7
+								}
+							}],
+							yAxes: [{
+								ticks: {
+									min: 0,
+									maxTicksLimit: 5
+								},
+								gridLines: {
+									color: "rgba(0, 0, 0, .125)",
+								}
+							}],
+						},
+						legend: {
+							display: false
+						}
+					}
+				});
+			});
+	}
+
+	function showProductGraph() {
+		$.post("php_action/chart/productChart.php",
+			function(data) {
+				var data1 = JSON.parse(data)
+				var label = [];
+				var sale = [];
+
+				for (var i in data1) {
+					label.push(data1[i].product_name);
+					sale.push(data1[i].totalProductSale);
+				}
+
+				var graphTarget = $("#pieChart");
+
+				var myPieChart = new Chart(graphTarget, {
+					type: 'pie',
+					data: {
+						labels: label,
+						datasets: [{
+							data: sale,
+							backgroundColor: ['#007bff', '#dc3545', '#ffc107', '#28a745'],
+						}],
+					},
+				});
+			});
+	}
+
 	$(function() {
 		// top bar active
 		$('#navDashboard').addClass('active');

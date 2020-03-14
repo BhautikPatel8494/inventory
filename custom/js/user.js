@@ -45,7 +45,7 @@ $(document).ready(function() {
       // form validation
       if (username == "") {
         $("#username").after(
-          '<p class="text-danger"> The Username field is required </p>'
+          '<p class="text-danger"> This field is required </p>'
         );
         $("#username")
           .closest(".form-group")
@@ -58,7 +58,7 @@ $(document).ready(function() {
 
       if (pancard == "") {
         $("#pancard").after(
-          '<p class="text-danger"> The Pancard field is required </p>'
+          '<p class="text-danger"> This field is required </p>'
         );
         $("#pancard")
           .closest(".form-group")

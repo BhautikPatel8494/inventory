@@ -2,7 +2,7 @@
 
 require_once '../core.php';
 
-$sql = "SELECT * FROM permission WHERE company_id = $companyId";
+$sql = "SELECT permission.*, user_details.email FROM permission INNER JOIN user_details ON user_details.id = permission.user_id WHERE permission.company_id = $companyId";
 
 $result = $connect->query($sql);
 
@@ -11,6 +11,7 @@ if ($result->num_rows > 0) {
 
 	while ($row = $result->fetch_array()) {
 		$userId = $row[2];
+		$userEmail = $row[9];
 		if ($row[3] == 1) {
 			$brand = '<button class="label label-success" id="brand" onclick="editPermission(' . $userId . ', brand)">Yes</label>';
 		} else {
@@ -32,6 +33,11 @@ if ($result->num_rows > 0) {
 			$order = '<button class="label label-danger" id="orders" onclick="editPermission(' . $userId . ', orders)">No</label>';
 		}
 		if ($row[7] == 1) {
+			$purchaseOrder = '<button class="label label-success" id="purchase_order" onclick="editPermission(' . $userId . ', purchase_order)">Yes</label>';
+		} else {
+			$purchaseOrder = '<button class="label label-danger" id="purchase_order" onclick="editPermission(' . $userId . ', purchase_order)">No</label>';
+		}
+		if ($row[8] == 1) {
 			$user = '<button class="label label-success" id="user" onclick="editPermission(' . $userId . ', user)">Yes</label>';
 		} else {
 			$user = '<button class="label label-danger" id="user" onclick="editPermission(' . $userId . ', user)">No</label>';
@@ -45,11 +51,12 @@ if ($result->num_rows > 0) {
 
 		$output['data'][] = array(
 			// name
-			$userId,
+			$userEmail,
 			$brand,
 			$category,
 			$product,
 			$order,
+			$purchaseOrder,
 			$user
 		);
 	} // /while 

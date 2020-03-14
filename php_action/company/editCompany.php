@@ -24,9 +24,13 @@ if ($_POST) {
 	$accountName = $_POST['account_name'];
 	$branchName = $_POST['branch_name'];
 	$accountNo = $_POST['account_no'];
-	$access = $_POST['access'];
 
-	$sql = "UPDATE company_details SET company_name = '$companyName', owner_name = '$ownerName', email = '$email', gstno = '$gstno', building_no = '$building', street_name = '$street', landmark = '$landmark', pincode = '$pincode', city = '$city', state = '$state', country = '$country', mobile = '$mobile', bank_name = '$bankName', ifsc_code = '$ifsc' ,account_name = '$accountName',branch_name = '$branchName' , account_no = '$accountNo', access = $access WHERE id = {$company_Id}";
+	if (isset($_POST['isUser'])) {
+		$sql = "UPDATE company_details SET company_name = '$companyName', owner_name = '$ownerName', email = '$email', gstno = '$gstno', building_no = '$building', street_name = '$street', landmark = '$landmark', pincode = '$pincode', city = '$city', state = '$state', country = '$country', mobile = '$mobile', bank_name = '$bankName', ifsc_code = '$ifsc' ,account_name = '$accountName',branch_name = '$branchName' , account_no = '$accountNo' WHERE id = {$company_Id}";
+	} else {
+		$access = $_POST['access'];
+		$sql = "UPDATE company_details SET company_name = '$companyName', owner_name = '$ownerName', email = '$email', gstno = '$gstno', building_no = '$building', street_name = '$street', landmark = '$landmark', pincode = '$pincode', city = '$city', state = '$state', country = '$country', mobile = '$mobile', bank_name = '$bankName', ifsc_code = '$ifsc' ,account_name = '$accountName',branch_name = '$branchName' , account_no = '$accountNo', access = $access WHERE id = {$company_Id}";
+	}
 
 	if ($connect->query($sql) === TRUE) {
 		$valid['success'] = true;

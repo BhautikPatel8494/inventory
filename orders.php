@@ -110,7 +110,7 @@ if ($_GET['o'] == 'add') {
 										<select class="form-control" name="productName[]" id="productName<?php echo $x; ?>" onchange="getProductData(<?php echo $x; ?>)">
 											<option value="">~~SELECT~~</option>
 											<?php
-													$productSql = "SELECT * FROM product WHERE active = 1 AND quantity != 0 AND company_id = $companyId";
+													$productSql = "SELECT * FROM product WHERE active = 1 AND quantity != 0 AND company_id = $companyId AND company_id = $companyId";
 													$productData = $connect->query($productSql);
 
 													while ($row = $productData->fetch_array()) {
@@ -223,18 +223,6 @@ if ($_GET['o'] == 'add') {
 					</div>
 					<!--/form-group-->
 					<div class="form-group">
-						<label for="clientContact" class="col-sm-3 control-label">Payment Status</label>
-						<div class="col-sm-9">
-							<select class="form-control" name="paymentStatus" id="paymentStatus">
-								<option value="">~~SELECT~~</option>
-								<option value="1">Full Payment</option>
-								<option value="2">Advance Payment</option>
-								<option value="3">No Payment</option>
-							</select>
-						</div>
-					</div>
-					<!--/form-group-->
-					<div class="form-group">
 						<label for="clientContact" class="col-sm-3 control-label">Payment Place</label>
 						<div class="col-sm-9">
 							<select class="form-control" name="paymentPlace" id="paymentPlace">
@@ -253,6 +241,7 @@ if ($_GET['o'] == 'add') {
 					<div class="col-sm-offset-2 col-sm-10">
 						<button type="button" class="btn btn-default" onclick="addRow()" id="addRowBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-plus-sign"></i> Add Row </button>
 
+						<input type="hidden" class="form-control" id="type" name="type" value="sales" />
 						<button type="submit" id="createOrderBtn" data-loading-text="Loading..." class="btn btn-success"><i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
 
 						<button type="reset" class="btn btn-default" onclick="resetOrderForm()"><i class="glyphicon glyphicon-erase"></i> Reset</button>
@@ -335,7 +324,7 @@ if ($_GET['o'] == 'add') {
 					<tbody>
 						<?php
 
-							$orderItemSql = "SELECT order_item.order_item_id, order_item.order_id, order_item.product_id, order_item.quantity, order_item.rate, order_item.total FROM order_item WHERE order_item.order_id = {$orderId}";
+							$orderItemSql = "SELECT order_item.order_item_id, order_item.order_id, order_item.product_id, order_item.quantity, order_item.rate, order_item.total FROM order_item WHERE order_item.order_id = {$orderId} AND type = 'sale'";
 							$orderItemResult = $connect->query($orderItemSql);
 							// $orderItemData = $orderItemResult->fetch_all();						
 
@@ -353,7 +342,7 @@ if ($_GET['o'] == 'add') {
 										<select class="form-control" name="productName[]" id="productName<?php echo $x; ?>" onchange="getProductData(<?php echo $x; ?>)">
 											<option value="">~~SELECT~~</option>
 											<?php
-													$productSql = "SELECT * FROM product WHERE active = 1 AND quantity != 0";
+													$productSql = "SELECT * FROM product WHERE active = 1 AND quantity != 0 AND company_id = $companyId";
 													$productData = $connect->query($productSql);
 
 													while ($row = $productData->fetch_array()) {
@@ -378,7 +367,7 @@ if ($_GET['o'] == 'add') {
 								<td style="padding-left:20px;">
 									<div class="form-group">
 										<?php
-												$productSql = "SELECT * FROM product WHERE active = 1 AND quantity != 0";
+												$productSql = "SELECT * FROM product WHERE active = 1 AND quantity != 0 AND company_id = $companyId";
 												$productData = $connect->query($productSql);
 
 												while ($row = $productData->fetch_array()) {
@@ -505,24 +494,6 @@ if ($_GET['o'] == 'add') {
 					</div>
 					<!--/form-group-->
 					<div class="form-group">
-						<label for="clientContact" class="col-sm-3 control-label">Payment Status</label>
-						<div class="col-sm-9">
-							<select class="form-control" name="paymentStatus" id="paymentStatus">
-								<option value="">~~SELECT~~</option>
-								<option value="1" <?php if ($data[12] == 1) {
-															echo "selected";
-														} ?>>Full Payment</option>
-								<option value="2" <?php if ($data[12] == 2) {
-															echo "selected";
-														} ?>>Advance Payment</option>
-								<option value="3" <?php if ($data[10] == 3) {
-															echo "selected";
-														} ?>>No Payment</option>
-							</select>
-						</div>
-					</div>
-					<!--/form-group-->
-					<div class="form-group">
 						<label for="clientContact" class="col-sm-3 control-label">Payment Place</label>
 						<div class="col-sm-9">
 							<select class="form-control" name="paymentPlace" id="paymentPlace">
@@ -546,6 +517,7 @@ if ($_GET['o'] == 'add') {
 
 						<input type="hidden" name="orderId" id="orderId" value="<?php echo $_GET['i']; ?>" />
 						<input type="hidden" name="userId" id="userId" value="<?php echo $data[15]  ?>" />
+						<input type="hidden" name="type" id="type" value="sale" />
 
 						<button type="submit" id="editOrderBtn" data-loading-text="Loading..." class="btn btn-success"><i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
 
@@ -603,19 +575,6 @@ if ($_GET['o'] == 'add') {
 						</select>
 					</div>
 				</div>
-				<!--/form-group-->
-				<div class="form-group">
-					<label for="clientContact" class="col-sm-3 control-label">Payment Status</label>
-					<div class="col-sm-9">
-						<select class="form-control" name="paymentStatus" id="paymentStatus">
-							<option value="">~~SELECT~~</option>
-							<option value="1">Full Payment</option>
-							<option value="2">Advance Payment</option>
-							<option value="3">No Payment</option>
-						</select>
-					</div>
-				</div>
-				<!--/form-group-->
 
 			</div>
 			<!--/modal-body-->

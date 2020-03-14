@@ -8,6 +8,8 @@ $valid['success'] = array('success' => false, 'messages' => array(), 'order_id' 
 if ($_POST) {
 
 	$orderDate = date('Y-m-d', strtotime($_POST['orderDate']));
+	$type = $_POST['type'];
+
 	$clientName = $_POST['clientName'];
 	$clientContact = $_POST['clientContact'];
 	$subTotalValue = $_POST['subTotalValue'];
@@ -18,17 +20,27 @@ if ($_POST) {
 	$paid = $_POST['paid'];
 	$dueValue = $_POST['dueValue'];
 	$paymentType = $_POST['paymentType'];
-	$paymentStatus = $_POST['paymentStatus'];
-	$paymentPlace = $_POST['paymentPlace'];
+	if ($dueValue > 0) {
+		$paymentStatus = 2;
+	} else if ($paid == 0) {
+		$paymentStatus = 3;
+	} else {
+		$paymentStatus = 1;
+	}
 	$gstn = $_POST['gstn'];
 	$userid = null;
 	if (isset($_SESSION['userId'])) {
 		$userid = $_SESSION['userId'];
-	} else { 
+	} else {
 		$userid = 0;
 	}
 
-	$sql = "INSERT INTO orders (company_id, order_date, client_name, client_contact, sub_total, vat, total_amount, discount, grand_total, paid, due, payment_type, payment_status,payment_place, gstn,user_id) VALUES ($companyId,'$orderDate', '$clientName', '$clientContact', '$subTotalValue', '$vatValue', '$totalAmountValue', '$discount', '$grandTotalValue', '$paid', '$dueValue', $paymentType, $paymentStatus,$paymentPlace,$gstn,$userid)";
+	if ($type == "purchase") {
+		$sql = "INSERT INTO purchase_order (company_id, order_date, client_name, client_contact, sub_total, vat, total_amount, discount, grand_total, paid, due, payment_type, payment_status, gstn,user_id) VALUES ($companyId,'$orderDate', '$clientName', '$clientContact', '$subTotalValue', '$vatValue', '$totalAmountValue', '$discount', '$grandTotalValue', '$paid', '$dueValue', $paymentType, $paymentStatus,$gstn,$userid)";
+	} else {
+		$paymentPlace = $_POST['paymentPlace'];
+		$sql = "INSERT INTO orders (company_id, order_date, client_name, client_contact, sub_total, vat, total_amount, discount, grand_total, paid, due, payment_type, payment_status,payment_place, gstn,user_id) VALUES ($companyId,'$orderDate', '$clientName', '$clientContact', '$subTotalValue', '$vatValue', '$totalAmountValue', '$discount', '$grandTotalValue', '$paid', '$dueValue', $paymentType, $paymentStatus,$paymentPlace,$gstn,$userid)";
+	}
 
 	$order_id = null;
 	$orderStatus = false;
@@ -49,14 +61,23 @@ if ($_POST) {
 
 
 		while ($updateProductQuantityResult = $updateProductQuantityData->fetch_row()) {
-			$updateQuantity[$x] = $updateProductQuantityResult[0] - $_POST['quantity'][$x];
+			if ($type == "purchase") {
+				$updateQuantity[$x] = $updateProductQuantityResult[0] + $_POST['quantity'][$x];
+			} else {
+				$updateQuantity[$x] = $updateProductQuantityResult[0] - $_POST['quantity'][$x];
+			}
 			// update product table
 			$updateProductTable = "UPDATE product SET quantity = '" . $updateQuantity[$x] . "' WHERE product_id = " . $_POST['productName'][$x] . "";
 			$connect->query($updateProductTable);
 
 			// add into order_item
-			$orderItemSql = "INSERT INTO order_item (order_id, product_id, quantity, rate, total, order_item_status) 
-				VALUES ('$order_id', '" . $_POST['productName'][$x] . "', '" . $_POST['quantity'][$x] . "', '" . $_POST['rateValue'][$x] . "', '" . $_POST['totalValue'][$x] . "', 1)";
+			if ($type == "purchase") {
+				$orderItemSql = "INSERT INTO order_item (type, order_id, product_id, quantity, rate, total, order_item_status) 
+				VALUES ('purchase', '$order_id', '" . $_POST['productName'][$x] . "', '" . $_POST['quantity'][$x] . "', '" . $_POST['rateValue'][$x] . "', '" . $_POST['totalValue'][$x] . "', 1)";
+			} else {
+				$orderItemSql = "INSERT INTO order_item (type, order_id, product_id, quantity, rate, total, order_item_status) 
+				VALUES ('sale', '$order_id', '" . $_POST['productName'][$x] . "', '" . $_POST['quantity'][$x] . "', '" . $_POST['rateValue'][$x] . "', '" . $_POST['totalValue'][$x] . "', 1)";
+			}
 
 			$connect->query($orderItemSql);
 

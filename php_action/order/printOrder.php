@@ -76,9 +76,6 @@ $orderItemResult = $connect->query($orderItemSql);
    background-color: #f0f3f5;
    border-bottom: 1px solid #c8ced3
 }</style>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <div class="container-fluid">
     <div id="ui-view" data-select2-id="ui-view">
         <div>

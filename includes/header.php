@@ -19,7 +19,8 @@ if (isset($_SESSION['userId'])) {
   $catogoryAccess = $permissionData[4];
   $productAccess = $permissionData[5];
   $orderAccess = $permissionData[6];
-  $userAccess = $permissionData[7];
+  $purchaseOrderAccess = $permissionData[7];
+  $userAccess = $permissionData[8];
 }
 
 ?>
@@ -77,6 +78,7 @@ if (isset($_SESSION['userId'])) {
               if ($_SESSION['role'] == 1) { ?>
                 <li id="topNavLogout"><a href="setting.php"> <i class="glyphicon glyphicon-tasks"></i> Setting</a></li>
               <?php } ?>
+              <li id="topNavLogout"><a href="profile.php"> <i class="glyphicon glyphicon-tasks"></i> Profile</a></li>
               <li id="topNavLogout"><a href="logout.php"> <i class="glyphicon glyphicon-log-out"></i> Logout</a></li>
             </ul>
           </li>
@@ -105,10 +107,19 @@ if (isset($_SESSION['userId'])) {
             </li>
             <?php if ($_SESSION['role'] == 1 || $orderAccess) { ?>
               <li>
-                <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="waves-effect"><i class="fa fa-columns fa-fw" aria-hidden="true"></i>Orders</a>
+                <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="waves-effect"><i class="fa fa-columns fa-fw" aria-hidden="true"></i>Sales Orders</a>
                 <ul class="dropdown-menu">
                   <li id="topNavAddOrder"><a href="orders.php?o=add"> <i class="glyphicon glyphicon-plus"></i> Add Orders</a></li>
                   <li id="topNavManageOrder"><a href="orders.php?o=manord"> <i class="glyphicon glyphicon-edit"></i> Manage Orders</a></li>
+                </ul>
+              </li>
+            <?php }
+              if ($_SESSION['role'] == 1 || $orderAccess) { ?>
+              <li>
+                <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="waves-effect"><i class="fa fa-history  fa-fw" aria-hidden="true"></i>Purchase Orders</a>
+                <ul class="dropdown-menu">
+                  <li id="topNavAddOrder"><a href="purchaseOrders.php?o=add"> <i class="glyphicon glyphicon-plus"></i> Add Orders</a></li>
+                  <li id="topNavManageOrder"><a href="purchaseOrders.php?o=manord"> <i class="glyphicon glyphicon-edit"></i> Manage Orders</a></li>
                 </ul>
               </li>
             <?php }
@@ -140,6 +151,11 @@ if (isset($_SESSION['userId'])) {
               if ($_SESSION['role'] == 1) { ?>
               <li>
                 <a href="permission.php" class="waves-effect"><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>Permission</a>
+              </li>
+            <?php }
+              if ($_SESSION['role'] == 1 || $productAccess) { ?>
+              <li>
+                <a href="report.php" class="waves-effect"> <i class="fa fa-check-square-o fa-fw" aria-hidden="true"></i> Report </a>
               </li>
           <?php }
           } ?>

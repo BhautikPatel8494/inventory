@@ -1,7 +1,7 @@
 <?php
 require_once '../core.php';
 
-$productWisesql = "SELECT product.product_name , SUM(order_item.total) as totalorderItem FROM order_item INNER JOIN product ON order_item.product_id = product.product_id WHERE product.company_id = $companyId GROUP BY order_item.product_id";
+$productWisesql = "SELECT SUM(orders.grand_total) as totalorderItem, orders.order_date FROM orders WHERE orders.company_id = $companyId GROUP BY orders.order_date";
 $productWiseQuery = $connect->query($productWisesql);
 
 $data = array();

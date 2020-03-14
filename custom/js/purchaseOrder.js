@@ -1,13 +1,6 @@
 var manageOrderTable;
 
 $(document).ready(function() {
-  $("#paymentPlace").change(function() {
-    if ($("#paymentPlace").val() == 2) {
-      $(".gst").text("IGST 18%");
-    } else {
-      $(".gst").text("GST 18%");
-    }
-  });
 
   var divRequest = $(".div-request").text();
 
@@ -56,7 +49,7 @@ $(document).ready(function() {
 
         if (clientName == "") {
           $("#clientName").after(
-            '<p class="text-danger"> The Client Name field is required </p>'
+            '<p class="text-danger"> The Saler Name field is required </p>'
           );
           $("#clientName")
             .closest(".form-group")
@@ -152,7 +145,7 @@ $(document).ready(function() {
           var quantityId = quantity[x].id;
           if (quantity[x].value == "") {
             $("#" + quantityId + "").after(
-              '<p class="text-danger"> Product Name Field is required!! </p>'
+              '<p class="text-danger"> Quantity Field is required!! </p>'
             );
             $("#" + quantityId + "")
               .closest(".form-group")
@@ -206,10 +199,7 @@ $(document).ready(function() {
                       '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
                       '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> ' +
                       response.messages +
-                      ' <br /> <br /> <a type="button" onclick="printOrder(' +
-                      response.order_id +
-                      ')" class="btn btn-primary"> <i class="glyphicon glyphicon-print"></i> Print </a>' +
-                      '<a href="orders.php?o=add" class="btn btn-default" style="margin-left:10px;"> <i class="glyphicon glyphicon-plus-sign"></i> Add New Order </a>' +
+                      '<br /> <br /> <a href="purchaseOrders.php?o=add" class="btn btn-default" style="margin-left:10px;"> <i class="glyphicon glyphicon-plus-sign"></i> Add New Order </a>' +
                       "</div>"
                   );
 
@@ -237,7 +227,7 @@ $(document).ready(function() {
     $("#topNavManageOrder").addClass("active");
 
     manageOrderTable = $("#manageOrderTable").DataTable({
-      ajax: "php_action/order/fetchOrder.php",
+      ajax: "php_action/order/fetchPurchaseOrder.php",
       order: []
     });
   } else if (divRequest == "editOrd") {
@@ -795,7 +785,7 @@ function removeOrder(orderId = null) {
         $.ajax({
           url: "php_action/order/removeOrder.php",
           type: "post",
-          data: { orderId: orderId, type: 'sale' },
+          data: { orderId: orderId, type: 'purchase' },
           dataType: "json",
           success: function(response) {
             $("#removeOrderBtn").button("reset");
@@ -861,7 +851,7 @@ function paymentOrder(orderId = null) {
     $.ajax({
       url: "php_action/order/fetchOrderData.php",
       type: "post",
-      data: { orderId: orderId, type: 'sale' },
+      data: { orderId: orderId, type: 'purchase' },
       dataType: "json",
       success: function(response) {
         // due
@@ -896,7 +886,7 @@ function paymentOrder(orderId = null) {
 
             if (paymentType == "") {
               $("#paymentType").after(
-                '<p class="text-danger">The Pay Amount field is required</p>'
+                '<p class="text-danger">The PaymentType field is required</p>'
               );
               $("#paymentType")
                 .closest(".form-group")
@@ -918,7 +908,7 @@ function paymentOrder(orderId = null) {
                   paymentType: paymentType,
                   paidAmount: paidAmount,
                   grandTotal: grandTotal,
-                  type: 'sale'
+                  type: 'purchase'
                 },
                 dataType: "json",
                 success: function(response) {

@@ -95,7 +95,8 @@ $result = $connect->query($sql);
                             <th style="width:10%;">Brand</th>
                             <th style="width:10%;">Catogory</th>
                             <th style="width:10%;">Product</th>
-                            <th style="width:10%;">Order</th>
+                            <th style="width:10%;">Sales Order</th>
+                            <th style="width:10%;">Purchase Order</th>
                             <th style="width:10%;">User</th>
                         </tr>
                     </thead>

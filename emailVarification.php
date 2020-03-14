@@ -1,32 +1,66 @@
+<?php require('php_action/class.phpmailer.php');
+
+if ($_POST) {
+
+    $email = $_POST['email'];
+    $message = 'test';
+    $mail = new PHPMailer();
+    // $mail->isSMTP();                                      // Set mailer to use SMTP
+    // $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+    // $mail->SMTPAuth = true;                               // Enable SMTP authentication
+    // $mail->Username = 'bhautikpatel8494@gmail.com';                 // SMTP username
+    // $mail->Password = 'bhautik@8494';                           // SMTP password
+    // $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+    // $mail->Port = 587;                                    // TCP port to connect to
+
+    $mail->AddReplyTo('bhautikpatel8494@gmail.com', 'Bhautik Patel');
+    $mail->SetFrom('bhautikpatel8494@gmail.com', 'Bhautik Patel');
+    $mail->AddAddress($email);
+    $mail->Subject = 'OTP';
+    $mail->MsgHTML($message);
+    $result = $mail->Send();
+    if (!$result) {
+        echo 'Mailer error' . $mail->ErrorInfo;
+    } else {
+        echo 'Sucess';
+        return $result;
+    }
+}
+
+
+?>
+
+
+
+
 <link href="assests/bootstrap/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="assests/bootstrap/js/bootstrap.min.js"></script>
 <script src="assests/jquery-ui/jquery-ui.min.js"></script>
 <style>
     .jumbotron.text-center {
-    height: 17em;
-}
+        height: 17em;
+    }
 
-input.form-control.col-md-6 {
-    width: 50%;
-    margin-right: 1em;
-    display: inline;
-}
+    input.form-control.col-md-6 {
+        width: 50%;
+        margin-right: 1em;
+        display: inline;
+    }
 
-div#notes {
-    margin-top: 2%;
-    width: 98%;
-    margin-left: 1%;
-}
+    div#notes {
+        margin-top: 2%;
+        width: 98%;
+        margin-left: 1%;
+    }
 
-@media (min-width: 991px) {
-	.col-md-9.col-sm-12 {
-    	margin-left: 12%;
-	}
-}
+    @media (min-width: 991px) {
+        .col-md-9.col-sm-12 {
+            margin-left: 12%;
+        }
+    }
 </style>
 
 <div class="container">
-    <!-- Instructions -->
     <div class="row">
         <div class="alert alert-success col-md-12" role="alert" id="notes">
             <h4>NOTES</h4>
@@ -36,7 +70,6 @@ div#notes {
             </ul>
         </div>
     </div>
-    <!-- Verification Entry Jumbotron -->
     <div class="row">
         <div class="col-md-12">
             <div class="jumbotron text-center">

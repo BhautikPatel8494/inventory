@@ -1,11 +1,11 @@
 <?php
-// the message
-$msg = "First line of text\nSecond line of text";
+$to = 'cerojob473@sweatmail.com';
+$subject = 'Marriage Proposal';
+$message = 'Hi Jane, will you marry me?';
+$headers = "From: bhautikpatel8494@gmail.com";
 
-// use wordwrap() if lines are longer than 70 characters
-$msg = wordwrap($msg,70);
-
-// send email
-mail("someone@example.com","My subject",$msg);
-sendOtp()
-?>/
+if (mail($to, $subject, $message, $headers)) {
+    echo 'Your mail has been sent successfully.';
+} else {
+    echo 'Unable to send email. Please try again.';
+}

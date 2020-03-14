@@ -68,14 +68,6 @@ if ($_POST) {
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <div class="navbar-header smoth">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainmenu">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="#home-area"><img src="assests/images/logo166x24.png" alt=""></a>
-                    </div>
                     <div class="collapse navbar-collapse navbar-right" id="mainmenu">
                         <ul class="nav navbar-nav primary-menu">
                             <li class="active"><a href="#home-area">Home</a></li>
@@ -83,7 +75,6 @@ if ($_POST) {
                             <li><a href="#price-area">Price</a></li>
                             <li><a href="#contact-area" id="contact_area">Contact</a></li>
                             <li></li>
-                            <!-- <li class="mx-5 "><a href="login.php"><i class="fa fa-sign-in-alt"></i> <span class="text-white text-lg">Login/Signup<span></a></li> -->
                         </ul>
                     </div>
                 </div>
@@ -105,7 +96,7 @@ if ($_POST) {
                             <div class="wow fadeInUp upper latter-space" data-wow-delay="0.2s">Login / SignUp</div>
                             <div class="wow fadeInUp" data-wow-delay="0.7s">
                                 <button type="button" class="btn btn-primary" style="padding-left: 60px; padding-right: 55px;" onclick="window.location.href='login.php?type=admin'">Company</button>
-                                <button type="button" class="btn btn-success" style="padding-left: 60px; padding-right: 55px;" onclick="window.location.href='login.php?type=user'">User</button>
+                                <button type="button" class="btn btn-success" style="padding-left: 60px; padding-right: 55px;" onclick="window.location.href='login.php?type=user'">Employee</button>
                             </div>
                         </div>
                     </div>
@@ -702,31 +693,6 @@ if ($_POST) {
     <script src="assests/vassets/js/maps.js"></script>
     <script type="text/javascript">
         //function for tittle scrolling
-        // function scrlsts() {
-        //     //var scrltest = " Nature ";
-        //     scrltest=document.title;
-
-        //     //alert(scrltest);
-        //     scrltest = scrltest.substring(1, scrltest.length) + scrltest.substring(0, 1);
-
-        //     //alert(scrltest);
-        //     document.title = scrltest;
-
-        //     setTimeout("scrlsts()", 1000);
-        // }
-        $(document).ready(function() {
-                    // var scrltest = document.title;
-                    // document.title=scrltest;
-                    // scrlsts();
-
-                    if ({
-                            {
-                                \
-                                Session::get('contact_msg') != ''
-                            }
-                        }) {
-                        $('#contact_msg').text(" Contact details submitted...");
-                        $('#contact_area').trigger("click"); // console.log('contact'); } }); 
     </script>
 </body>
 
