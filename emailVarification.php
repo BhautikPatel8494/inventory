@@ -1,37 +1,32 @@
-<?php require('php_action/class.phpmailer.php');
+<?php require_once 'php_action/db_connect.php';
 
-if ($_POST) {
 
+if (isset($_POST['email'])) {
     $email = $_POST['email'];
-    $message = 'test';
-    $mail = new PHPMailer();
-    // $mail->isSMTP();                                      // Set mailer to use SMTP
-    // $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
-    // $mail->SMTPAuth = true;                               // Enable SMTP authentication
-    // $mail->Username = 'bhautikpatel8494@gmail.com';                 // SMTP username
-    // $mail->Password = 'bhautik@8494';                           // SMTP password
-    // $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-    // $mail->Port = 587;                                    // TCP port to connect to
+} else {
+    $email = $_GET['email'];
+}
 
-    $mail->AddReplyTo('bhautikpatel8494@gmail.com', 'Bhautik Patel');
-    $mail->SetFrom('bhautikpatel8494@gmail.com', 'Bhautik Patel');
-    $mail->AddAddress($email);
-    $mail->Subject = 'OTP';
-    $mail->MsgHTML($message);
-    $result = $mail->Send();
-    if (!$result) {
-        echo 'Mailer error' . $mail->ErrorInfo;
-    } else {
-        echo 'Sucess';
-        return $result;
+$error = null;
+
+if (isset($_POST['verify'])) {
+    $code = $_POST['verifyCode'];
+    $sql = "SELECT * FROM reset_password WHERE email = '$email'";
+    $result = $connect->query($sql);
+
+    if ($result->num_rows == 1) {
+        $value = $result->fetch_assoc();
+        $resetCode = $value['verification_code'];
+
+        if ($resetCode == $code) {
+            header('location: http://localhost/inventory-management-system/newPassword.php?email='.$email);
+        } else {
+            $error = 'Invalid code';
+        }
     }
 }
 
-
 ?>
-
-
-
 
 <link href="assests/bootstrap/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="assests/bootstrap/js/bootstrap.min.js"></script>
@@ -73,12 +68,21 @@ if ($_POST) {
     <div class="row">
         <div class="col-md-12">
             <div class="jumbotron text-center">
+                <?php if ($error) { ?>
+                    <div class="messages">
+                        <div class="alert alert-warning" role="alert">
+                            <i class="glyphicon glyphicon-exclamation-sign"></i>
+                            Oopss ! Verification code is invalid. Please enter valid verification code.
+                        </div>
+                    </div>
+                <?php } ?>
                 <h2>Enter the verification code</h2>
-                <form method="post" action="confirm" role="form">
+                <form method="post" action="emailVarification.php">
                     <div class="col-md-9 col-sm-12">
                         <div class="form-group form-group-lg">
                             <input type="text" class="form-control col-md-6 col-sm-6 col-sm-offset-2" name="verifyCode" required>
-                            <input class="btn btn-primary btn-lg col-md-2 col-sm-2" type="submit" value="Verify">
+                            <input type="hidden" name="email" value="<?php echo $email ?>">
+                            <input class="btn btn-primary btn-lg col-md-2 col-sm-2" name="verify" type="submit" value="Verify">
                         </div>
                     </div>
                 </form>

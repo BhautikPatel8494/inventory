@@ -17,7 +17,7 @@ if ($_POST) {
 
 	$type = explode('.', $_FILES['productImage']['name']);
 	$type = $type[count($type) - 1];
-	$url = '../assests/images/stock/' . uniqid(rand()) . '.' . $type;
+	$url = '../../assests/images/stock/' . uniqid(rand()) . '.' . $type;
 	if (in_array($type, array('gif', 'jpg', 'jpeg', 'png', 'JPG', 'GIF', 'JPEG', 'PNG'))) {
 		if (is_uploaded_file($_FILES['productImage']['tmp_name'])) {
 			if (move_uploaded_file($_FILES['productImage']['tmp_name'], $url)) {

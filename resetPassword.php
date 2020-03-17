@@ -1,3 +1,26 @@
+<?php
+require_once 'php_action/db_connect.php';
+
+$error = null;
+if ($_POST) {
+    $email = $_POST['email'];
+    $sql = "SELECT email 
+    FROM (
+        SELECT email AS email FROM user_details
+        UNION ALL
+        SELECT email FROM company_details
+    ) a WHERE email = '$email'";
+    $checkResult = $connect->query($sql);
+
+    if ($checkResult->num_rows > 0) {
+        header('location: http://localhost/inventory-management-system/emailVarification.php?email=' . $email);
+    } else {
+        $error = 'Email does not exist. Please Try to register';
+    }
+}
+?>
+
+
 <link href="assests/bootstrap/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="assests/bootstrap/js/bootstrap.min.js"></script>
 <script src="assests/jquery-ui/jquery-ui.min.js"></script>
@@ -18,11 +41,19 @@
                 <div class="panel-body">
                     <div class="text-center">
                         <h3><i class="fa fa-lock fa-4x"></i></h3>
+                        <?php if ($error) { ?>
+                            <div class="messages">
+                                <div class="alert alert-warning" role="alert">
+                                    <i class="glyphicon glyphicon-exclamation-sign"></i>
+                                    <?php echo $error; ?>
+                                </div>
+                            </div>
+                        <?php } ?>
                         <h2 class="text-center">Forgot Password?</h2>
                         <p>You can reset your password here.</p>
                         <div class="panel-body">
 
-                            <form id="register-form" role="form" autocomplete="off" action="emailVarification.php" class="form" method="post">
+                            <form id="register-form" role="form" autocomplete="off" action="resetPassword.php" class="form" method="post">
 
                                 <div class="form-group">
                                     <div class="input-group">
@@ -32,9 +63,9 @@
                                 </div>
                                 <div class="form-group">
                                     <input name="recover-submit" class="btn btn-lg btn-primary btn-block" value="Reset Password" type="submit">
+                                    <br/>
+                                    <a href="index.php">back to home</a>
                                 </div>
-
-                                <input type="hidden" class="hide" name="token" id="token" value="">
                             </form>
 
                         </div>

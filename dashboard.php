@@ -171,7 +171,7 @@ $connect->close();
 
 	<div class="col-md-4">
 		<div class="card">
-			<div class="cardHeader" style="background-color:#245580;">
+			<div class="cardHeader" style="background-color:#504C41;">
 				<h1><?php if ($panding) {
 						echo $panding;
 					} else {
@@ -187,7 +187,7 @@ $connect->close();
 
 	<div class="col-md-4">
 		<div class="card">
-			<div class="cardHeader" style="background-color:#245580;">
+			<div class="cardHeader" style="background-color:#771220;">
 				<h1><?php if ($totalExpence) {
 						echo $totalExpence;
 					} else {
@@ -203,7 +203,7 @@ $connect->close();
 
 	<div class="col-md-4">
 		<div class="card">
-			<div class="cardHeader" style="background-color:#245580;">
+			<div class="cardHeader" style="background-color:#592359;">
 				<h1><?php if ($pandingExpense) {
 						echo $pandingExpense;
 					} else {
@@ -337,7 +337,7 @@ $connect->close();
 				var barGraph = new Chart(graphTarget, {
 					type: 'line',
 					data: {
-						labels: label,
+						labels: label.sort(),
 						datasets: [{
 							label: "Sale",
 							lineTension: 0.3,
@@ -350,7 +350,7 @@ $connect->close();
 							pointHoverBackgroundColor: "rgba(2,117,216,1)",
 							pointHitRadius: 50,
 							pointBorderWidth: 2,
-							data: sale,
+							data: sale.sort(),
 						}],
 					},
 					options: {
@@ -435,5 +435,4 @@ $connect->close();
 
 	});
 </script>
-
 <?php require_once 'includes/footer.php'; ?>

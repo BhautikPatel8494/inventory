@@ -1,5 +1,5 @@
 <?php require_once 'php_action/db_connect.php';
-
+session_start();
 ?>
 
 <!doctype html>
@@ -63,48 +63,17 @@
                                         }
                                         ?>
                                 </ul>
-                                <a href="payment.php?id=<?php echo $row[0] ?>&amount=<?php echo $row[2] ?>" class="bttn bttn-sm bttn-default">Purchase Now</a>
+                                <form action="Paytm/PaytmKit/pgRedirect.php" method="POST">
+                                    <input type="hidden" name="ORDER_ID" value="<?php echo  "ORDS" . rand(10000,99999999)?>">
+                                    <input type="hidden" name="CUST_ID" value="<?php echo $_SESSION['company_id'] ?>">
+                                    <input type="hidden" name="INDUSTRY_TYPE_ID" value="<?php echo $row[0] ?>">
+                                    <input type="hidden" name="CHANNEL_ID" value="WEB">
+                                    <input type="hidden" name="TXN_AMOUNT" value="<?php echo $row[2] ?>">
+                                    <input class="bttn bttn-sm bttn-default" type="submit" name="submit" value="Purchase Now">
+                                </form>
                             </div>
                         </div>
                     <?php } ?>
-
-                    <!-- <div class="col-xs-6 col-md-4 wow fadeInLeft" data-wow-delay="0.4s">
-                        <div class="price-box active" style="height:500px">
-                            <h4>Premium</h4>
-                            <h3 class="amount">&#8377;6000 /<span>Year</span></h3>
-                            <ul class="price-list">
-                                <li>Free Useable</li>
-                                <li>Easily can useable 10GB</li>
-                                <li>Free Secuirity Service</li>
-                            </ul>
-                            <a href="payment.php?amount=6000" class="bttn bttn-sm bttn-default">Purchase Now</a>
-                        </div>
-                    </div>
-                    <div class="col-xs-6 col-md-4 wow fadeInLeft" data-wow-delay="0.6s">
-                        <div class="price-box" style="height:500px">
-                            <h4>Business Pro</h4>
-                            <h3 class="amount">&#8377;8000 /<span>Year</span></h3>
-                            <ul class="price-list">
-                                <li>Free Useable</li>
-                                <li>Free Secuirity Service</li>
-                                <li>Dedicated Useable Account</li>
-                            </ul>
-                            <a href="payment.php?amount=8000" class="bttn bttn-sm bttn-default">Purchase Now</a>
-                        </div>
-                    </div>
-                    <div class="col-xs-6 col-md-4 wow fadeInLeft" data-wow-delay="0.8s">
-                        <div class="price-box" style="height:500px">
-                            <h4>Ultimate+ Life</h4>
-                            <h3 class="amount">&#8377;22000 /<span>Year</span></h3>
-                            <ul class="price-list">
-                                <li>Free Useable</li>
-                                <li>Easily can useable 10GB</li>
-                                <li>Free Secuirity Service</li>
-                                <li>Dedicated Useable Account</li>
-                            </ul>
-                            <a href="payment.php?amount=22000" class="bttn bttn-sm bttn-default">Purchase Now</a>
-                        </div>
-                    </div> -->
                 </div>
             </div>
         </div>

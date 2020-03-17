@@ -55,7 +55,7 @@ if ($result->num_rows > 0) {
 		$brand = $row[8];
 		$category = $row[9];
 
-		$imageUrl = substr($row[2], 3);
+		$imageUrl = substr($row[2], 6);
 		$productImage = "<img class='img-round' src='" . $imageUrl . "' style='height:30px; width:50px;'  />";
 
 		$output['data'][] = array(

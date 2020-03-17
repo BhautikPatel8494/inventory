@@ -157,6 +157,9 @@ if (isset($_SESSION['userId'])) {
               <li>
                 <a href="report.php" class="waves-effect"> <i class="fa fa-check-square-o fa-fw" aria-hidden="true"></i> Report </a>
               </li>
+              <li>
+                <a href="https://app.crisp.chat/website/ede79f9a-2be9-4f53-b681-a13397856670/inbox/" class="waves-effect" target="_blank"><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>Chat</a>
+              </li>
           <?php }
           } ?>
         </ul>

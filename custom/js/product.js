@@ -249,8 +249,11 @@ function editProduct(productId = null) {
       success: function(response) {
         $(".div-loading").addClass("div-hide");
         $(".div-result").removeClass("div-hide");
+        // console.log(response.product_image)
+        // var imageUrl = response.product_image.substring(1);
+        // console.log(response.product_image.substring(5))
 
-        $("#getProductImage").attr("src", "stock/" + response.product_image);
+        $("#getProductImage").attr("src", 'inventory-managment-system' + response.product_image);
 
         $("#editProductImage").fileinput({});
 
@@ -512,7 +515,8 @@ function editProduct(productId = null) {
                       url: "php_action/product/fetchProductImageUrl.php?i=" + productId,
                       type: "post",
                       success: function(response) {
-                        $("#getProductImage").attr("src", response);
+                        var imageUrl = substr(response[2], 6);
+                        $("#getProductImage").attr("src", imageUrl);
                       }
                     });
 
