@@ -29,6 +29,8 @@ if (isset($_POST['userSubmit'])) {
 	$sql1 = "INSERT INTO user_details (email, password, company_id, pancard, building_no, street_name, landmark, pincode, city, state, country, mobile, bank_name, ifsc_code, account_name, branch_name, account_no, name) VALUES ('$email', '$password', '$companyId', '$pancard', '$building', '$street', '$landmark', '$pincode' ,'$city', '$state', '$country', '$mobile' , '$bankName',  '$ifsc', '$accountName', '$branchName', '$accountNo', '$person')";
 
 	if ($connect->query($sql1) === true) {
+		$last_id = $connect->insert_id;
+		$sql1 = "INSERT INTO permission (company_id, user_id, brand, category, product, orders, purchase_order, user) VALUES ($companyId, $last_id, 0, 0, 0, 1, 0, 0)";
 		header('location: http://localhost/inventory-management-system/login.php?type=user');
 	} else {
 		echo ("Error description: " . mysqli_error($connect));
