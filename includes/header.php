@@ -114,7 +114,7 @@ if (isset($_SESSION['userId'])) {
                 </ul>
               </li>
             <?php }
-              if ($_SESSION['role'] == 1 || $orderAccess) { ?>
+              if ($_SESSION['role'] == 1 || $purchaseOrderAccess) { ?>
               <li>
                 <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="waves-effect"><i class="fa fa-history  fa-fw" aria-hidden="true"></i>Purchase Orders</a>
                 <ul class="dropdown-menu">
@@ -153,7 +153,7 @@ if (isset($_SESSION['userId'])) {
                 <a href="permission.php" class="waves-effect"><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>Permission</a>
               </li>
             <?php }
-              if ($_SESSION['role'] == 1 || $productAccess) { ?>
+              if ($_SESSION['role'] == 1 ) { ?>
               <li>
                 <a href="report.php" class="waves-effect"> <i class="fa fa-check-square-o fa-fw" aria-hidden="true"></i> Report </a>
               </li>

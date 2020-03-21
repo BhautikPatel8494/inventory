@@ -13,7 +13,7 @@ if ($_POST) {
     $checkResult = $connect->query($sql);
 
     if ($checkResult->num_rows > 0) {
-        header('location: http://localhost/inventory-management-system/emailVarification.php?email=' . $email);
+        header('location: http://localhost/inventory-management-system/php_action/user/sendMail.php?email=' . $email);
     } else {
         $error = 'Email does not exist. Please Try to register';
     }
