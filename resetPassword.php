@@ -23,7 +23,7 @@ if ($_POST) {
 
 <link href="assests/bootstrap/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="assests/bootstrap/js/bootstrap.min.js"></script>
-<script src="assests/jquery-ui/jquery-ui.min.js"></script>
+<script src="assests/jquery/jquery-ui.min.js"></script>
 
 <style>
     .form-gap {

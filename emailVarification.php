@@ -30,7 +30,7 @@ if (isset($_POST['verify'])) {
 
 <link href="assests/bootstrap/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="assests/bootstrap/js/bootstrap.min.js"></script>
-<script src="assests/jquery-ui/jquery-ui.min.js"></script>
+<script src="assests/jquery/jquery-ui.min.js"></script>
 <style>
     .jumbotron.text-center {
         height: 17em;

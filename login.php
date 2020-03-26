@@ -110,9 +110,9 @@ if (isset($_POST["userSubmit"])) {
     <link rel="stylesheet" href="custom/css/custom.css">
 
     <!-- MATERIAL DESIGN ICONIC FONT -->
-    <link rel="stylesheet" href="assests/loginassets/fonts/material-design-iconic-font/css/material-design-iconic-font.css">
-    <link rel="stylesheet" href="assests/loginassets/css/style.css">
-    <link rel="stylesheet" href="assests/loginassets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assests/auth/login/fonts/material-design-iconic-font/css/material-design-iconic-font.css">
+    <link rel="stylesheet" href="assests/auth/login/css/style.css">
+    <link rel="stylesheet" href="assests/auth/login/css/bootstrap.min.css">
 
 </head>
 
@@ -211,12 +211,12 @@ if (isset($_POST["userSubmit"])) {
 
         </div>
     </div>
-    <script src="assests/loginassets/js/jquery-3.3.1.min.js"></script>
+    <script src="assests/auth/login/js/jquery-3.3.1.min.js"></script>
 
     <!-- JQUERY STEP -->
-    <script src="assests/loginassets/js/jquery.steps.js"></script>
+    <script src="assests/auth/login/js/jquery.steps.js"></script>
 
-    <script src="assests/loginassets/js/main.js"></script>
+    <script src="assests/auth/login/js/main.js"></script>
     <!-- Template created and distributed by Colorlib -->
 </body>
 

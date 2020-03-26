@@ -15,17 +15,13 @@ session_start();
     <!-- Title -->
     <title>Stokers</title>
     <!-- Plugin-CSS -->
-    <link rel="stylesheet" href="assests/vassets/css/bootstrap.min.css">
-    <!-- <link rel="stylesheet" href="assests/vassets/css/owl.carousel.min.css"> -->
-    <!-- <link rel="stylesheet" href="assests/vassets/css/icofont.css">
-    <link rel="stylesheet" href="assests/vassets/css/magnific-popup.css"> -->
-    <link rel="stylesheet" href="assests/vassets/css/animate.css">
+    <link rel="stylesheet" href="assests/auth/home/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assests/auth/home/css/animate.css">
     <!-- Main-Stylesheets -->
-    <link rel="stylesheet" href="assests/vassets/css/normalize.css">
-    <link rel="stylesheet" href="assests/vassets/style.css">
-    <link rel="stylesheet" href="assests/vassets/css/responsive.css">
-    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
-    <script src="assests/vassets/js/vendor/modernizr-2.8.3.min.js"></script>
+    <link rel="stylesheet" href="assests/auth/home/css/normalize.css">
+    <link rel="stylesheet" href="assests/auth/home/style.css">
+    <link rel="stylesheet" href="assests/auth/home/css/responsive.css">
+    <script src="assests/auth/home/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 
 <body class="site2" data-spy="scroll" data-target=".mainmenu-area">
@@ -63,9 +59,9 @@ session_start();
                                         }
                                         ?>
                                 </ul>
-                                <form action="Paytm/PaytmKit/pgRedirect.php" method="POST">
+                                <form action="vendor/Paytm/PaytmKit/pgRedirect.php" method="POST">
                                     <input type="hidden" name="ORDER_ID" value="<?php echo  "ORDS" . rand(10000,99999999)?>">
-                                    <input type="hidden" name="CUST_ID" value="<?php echo $_SESSION['company_id'] ?>">
+                                    <input type="hidden" name="CUST_ID" value="<?php echo 3 ?>">
                                     <input type="hidden" name="INDUSTRY_TYPE_ID" value="<?php echo $row[0] ?>">
                                     <input type="hidden" name="CHANNEL_ID" value="WEB">
                                     <input type="hidden" name="TXN_AMOUNT" value="<?php echo $row[2] ?>">
@@ -81,23 +77,23 @@ session_start();
     <!-- Price-Area -->
 
     <!--Vendor-JS-->
-    <script src="assests/vassets/js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="assests/vassets/js/vendor/bootstrap.min.js"></script>
+    <script src="assests/auth/home/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="assests/auth/home/js/vendor/bootstrap.min.js"></script>
     <!--Plugin-JS-->
-    <script src="assests/vassets/js/owl.carousel.min.js"></script>
-    <script src="assests/vassets/js/appear.js"></script>
-    <script src="assests/vassets/js/bars.js"></script>
-    <script src="assests/vassets/js/waypoints.min.js"></script>
-    <script src="assests/vassets/js/counterup.min.js"></script>
-    <script src="assests/vassets/js/easypiechart.min.js"></script>
-    <script src="assests/vassets/js/mixitup.min.js"></script>
-    <script src="assests/vassets/js/scrollUp.min.js"></script>
-    <script src="assests/vassets/js/magnific-popup.min.js"></script>
-    <script src="assests/vassets/js/wow.min.js"></script>
+    <script src="assests/auth/home/js/owl.carousel.min.js"></script>
+    <script src="assests/auth/home/js/appear.js"></script>
+    <script src="assests/auth/home/js/bars.js"></script>
+    <script src="assests/auth/home/js/waypoints.min.js"></script>
+    <script src="assests/auth/home/js/counterup.min.js"></script>
+    <script src="assests/auth/home/js/easypiechart.min.js"></script>
+    <script src="assests/auth/home/js/mixitup.min.js"></script>
+    <script src="assests/auth/home/js/scrollUp.min.js"></script>
+    <script src="assests/auth/home/js/magnific-popup.min.js"></script>
+    <script src="assests/auth/home/js/wow.min.js"></script>
     <!--Main-active-JS-->
-    <script src="assests/vassets/js/main.js"></script>
+    <script src="assests/auth/home/js/main.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDXZ3vJtdK6aKAEWBovZFe4YKj1SGo9V20&callback=initMap"></script>
-    <script src="assests/vassets/js/maps.js"></script>
+    <script src="assests/auth/home/js/maps.js"></script>
     <script type="text/javascript">
     </script>
 </body>

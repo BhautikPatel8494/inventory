@@ -15,7 +15,7 @@ $CUST_ID = $_POST["CUST_ID"];
 $INDUSTRY_TYPE_ID = $_POST["INDUSTRY_TYPE_ID"];
 $CHANNEL_ID = $_POST["CHANNEL_ID"];
 $TXN_AMOUNT = $_POST["TXN_AMOUNT"];
-$URL = 'http://localhost/inventory-management-system/Paytm/PaytmKit/pgResponse.php?packageId='.$INDUSTRY_TYPE_ID.'&companyId='.$CUST_ID;
+$URL = 'http://localhost/inventory-management-system/vendor/Paytm/PaytmKit/pgResponse.php?packageId='.$INDUSTRY_TYPE_ID.'&companyId='.$CUST_ID;
 // Create an array having all required parameters for creating checksum.
 $paramList["MID"] = PAYTM_MERCHANT_MID;
 $paramList["ORDER_ID"] = $ORDER_ID;

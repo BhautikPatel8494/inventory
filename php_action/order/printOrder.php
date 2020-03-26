@@ -47,7 +47,8 @@ product.product_name FROM order_item
  WHERE order_item.order_id = $orderId";
 $orderItemResult = $connect->query($orderItemSql);
 
- $table = '<style>
+ $table = '
+<style>
  .card {
    margin-bottom: 1.5rem
 }
@@ -75,7 +76,9 @@ $orderItemResult = $connect->query($orderItemSql);
    margin-bottom: 0;
    background-color: #f0f3f5;
    border-bottom: 1px solid #c8ced3
-}</style>
+}
+</style>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
 <div class="container-fluid">
     <div id="ui-view" data-select2-id="ui-view">
         <div>

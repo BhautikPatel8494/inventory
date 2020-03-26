@@ -65,10 +65,7 @@ $connect->close();
 	}
 </style>
 
-<!-- fullCalendar 2.2.5-->
-<link rel="stylesheet" href="assests/plugins/fullcalendar/fullcalendar.min.css">
-<link rel="stylesheet" href="assests/plugins/fullcalendar/fullcalendar.print.css" media="print">
-<script type="text/javascript" src="assests/chart/Chart.min.js"></script>
+<script type="text/javascript" src="assests/dashboard/Chart.min.js"></script>
 
 
 <div class="row">
@@ -306,11 +303,6 @@ $connect->close();
 		</div>
 	</div>
 </div>
-<!--/row-->
-
-<!-- fullCalendar 2.2.5 -->
-<script src="assests/plugins/moment/moment.min.js"></script>
-<script src="assests/plugins/fullcalendar/fullcalendar.min.js"></script>
 
 
 <script type="text/javascript">
@@ -410,29 +402,5 @@ $connect->close();
 				});
 			});
 	}
-
-	$(function() {
-		// top bar active
-		$('#navDashboard').addClass('active');
-
-		//Date for the calendar events (dummy data)
-		var date = new Date();
-		var d = date.getDate(),
-			m = date.getMonth(),
-			y = date.getFullYear();
-
-		$('#calendar').fullCalendar({
-			header: {
-				left: '',
-				center: 'title'
-			},
-			buttonText: {
-				today: 'today',
-				month: 'month'
-			}
-		});
-
-
-	});
 </script>
 <?php require_once 'includes/footer.php'; ?>

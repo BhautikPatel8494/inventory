@@ -27,26 +27,20 @@ if ($_POST) {
     <!-- Title -->
     <title>Stokers</title>
     <!-- Place favicon.ico in the root directory -->
-    <link rel="apple-touch-icon" href="assests/vassets/images/apple-touch-icon.png">
-    <link rel="shortcut icon" href="assests/vassets/images/gtitle.png" />
+    <link rel="apple-touch-icon" href="assests/auth/home/images/apple-touch-icon.png">
+    <link rel="shortcut icon" href="assests/auth/home/images/gtitle.png" />
     <!-- Plugin-CSS -->
-    <link rel="stylesheet" href="assests/vassets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assests/vassets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="assests/vassets/css/icofont.css">
-    <link rel="stylesheet" href="assests/vassets/css/magnific-popup.css">
-    <link rel="stylesheet" href="assests/vassets/css/animate.css">
+    <link rel="stylesheet" href="assests/auth/home/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assests/auth/home/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="assests/auth/home/css/icofont.css">
+    <link rel="stylesheet" href="assests/auth/home/css/magnific-popup.css">
+    <link rel="stylesheet" href="assests/auth/home/css/animate.css">
     <!-- Main-Stylesheets -->
-    <link rel="stylesheet" href="assests/vassets/css/normalize.css">
-    <link rel="stylesheet" href="assests/vassets/style.css">
-    <link rel="stylesheet" href="assests/vassets/css/responsive.css">
+    <link rel="stylesheet" href="assests/auth/home/css/normalize.css">
+    <link rel="stylesheet" href="assests/auth/home/style.css">
+    <link rel="stylesheet" href="assests/auth/home/css/responsive.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <script src="assests/vassets/js/vendor/modernizr-2.8.3.min.js"></script>
-    <!-- <script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="ede79f9a-2be9-4f53-b681-a13397856670";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script> -->
-
-    <!--[if lt IE 9]>
-        <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-        <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <script src="assests/auth/home/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 
 <body class="site2" data-spy="scroll" data-target=".mainmenu-area">
@@ -186,7 +180,7 @@ if ($_POST) {
                 <div class="col-xs-12 col-sm-6 col-md-3">
                     <div class="service-box" style="height:530px">
                         <div class="box-image">
-                            <img src="assests/vassets/images/service-1.jpg" alt="">
+                            <img src="assests/auth/home/images/service-1.jpg" alt="">
                             <a href="#" class="box-plus">
                                 <i class="icofont icofont-plus"></i>
                             </a>
@@ -200,7 +194,7 @@ if ($_POST) {
                 <div class="col-xs-12 col-sm-6 col-md-3">
                     <div class="service-box" style="height:530px">
                         <div class="box-image">
-                            <img src="assests/vassets/images/advdoc.jpg" style="height:177px;width:245px" alt="">
+                            <img src="assests/auth/home/images/advdoc.jpg" style="height:177px;width:245px" alt="">
                             <a href="#" class="box-plus">
                                 <i class="icofont icofont-plus"></i>
                             </a>
@@ -214,7 +208,7 @@ if ($_POST) {
                 <div class="col-xs-12 col-sm-6 col-md-3">
                     <div class="service-box" style="height:530px">
                         <div class="box-image">
-                            <img src="assests/vassets/images/inex.jpg" style="height:177px;width:245px" alt="">
+                            <img src="assests/auth/home/images/inex.jpg" style="height:177px;width:245px" alt="">
                             <a href="#" class="box-plus">
                                 <i class="icofont icofont-plus"></i>
                             </a>
@@ -228,7 +222,7 @@ if ($_POST) {
                 <div class="col-xs-12 col-sm-6 col-md-3">
                     <div class="service-box" style="height:530px">
                         <div class="box-image">
-                            <img src="assests/vassets/images/deprpt.jpg" style="height:177px;width:245px" alt="">
+                            <img src="assests/auth/home/images/deprpt.jpg" style="height:177px;width:245px" alt="">
                             <a href="#" class="box-plus">
                                 <i class="icofont icofont-plus"></i>
                             </a>
@@ -457,7 +451,7 @@ if ($_POST) {
                             <h3>Vipul Goti</h3>
                             <h6>CEO, Ambica Group</h6>
                             <div class="testimonial-img">
-                                <img src="assests/vassets/images/testimonial-1.png" alt="">
+                                <img src="assests/auth/home/images/testimonial-1.png" alt="">
                             </div>
                         </div>
                         <div class="single-testimonial text-center">
@@ -467,7 +461,7 @@ if ($_POST) {
                             <h3>Manish Vaghasiya</h3>
                             <h6>CEO, Ozone Diamond</h6>
                             <div class="testimonial-img">
-                                <img src="assests/vassets/images/testimonial-2.png" alt="">
+                                <img src="assests/auth/home/images/testimonial-2.png" alt="">
                             </div>
                         </div>
                         <div class="single-testimonial text-center">
@@ -477,7 +471,7 @@ if ($_POST) {
                             <h3>Ankit Gopani</h3>
                             <h6>CEO, Panthi Enterprise</h6>
                             <div class="testimonial-img">
-                                <img src="assests/vassets/images/testimonial-1.png" alt="">
+                                <img src="assests/auth/home/images/testimonial-1.png" alt="">
                             </div>
                         </div>
                     </div>
@@ -504,7 +498,7 @@ if ($_POST) {
                 <div class="col-xs-12 col-md-6 wow fadeInUp">
                     <div class="blog-box">
                         <div class="blog-image">
-                            <img src="assests/vassets/images/arti_1.jpg" style="height:268px;width:555px" alt="">
+                            <img src="assests/auth/home/images/arti_1.jpg" style="height:268px;width:555px" alt="">
                         </div>
                         <div class="blog-details">
                             <h4><a href="#">Impact of GST on your company’s working capital</a></h4>
@@ -517,7 +511,7 @@ if ($_POST) {
                     <div class="blog-lists">
                         <div class="blog-list wow fadeInUp" data-wow-delay="0.2s">
                             <div class="blog-list-image">
-                                <img src="assests/vassets/images/rule.jpg" alt="">
+                                <img src="assests/auth/home/images/rule.jpg" alt="">
                             </div>
                             <h5><a href="#">GST Invoice Rules and Guidelines: Do’s and Don’ts</a></h5>
                             <div class="blog-list-meta"> <i class="icofont icofont-ui-calendar"></i> 16 JUNE 2016</div>
@@ -525,7 +519,7 @@ if ($_POST) {
                         </div>
                         <div class="blog-list wow fadeInUp" data-wow-delay="0.4s">
                             <div class="blog-list-image">
-                                <img src="assests/vassets/images/debit-credit.jpg" alt="">
+                                <img src="assests/auth/home/images/debit-credit.jpg" alt="">
                             </div>
                             <h5><a href="#">Credit Note and Debit Note</a></h5>
                             <div class="blog-list-meta"> <i class="icofont icofont-ui-calendar"></i> 16 JUNE 2016</div>
@@ -533,7 +527,7 @@ if ($_POST) {
                         </div>
                         <div class="blog-list wow fadeInUp" data-wow-delay="0.6s">
                             <div class="blog-list-image">
-                                <img src="assests/vassets/images/compo.jpg" alt="">
+                                <img src="assests/auth/home/images/compo.jpg" alt="">
                             </div>
                             <h5><a href="#">Composition Scheme under GST</a></h5>
                             <div class="blog-list-meta"> <i class="icofont icofont-ui-calendar"></i> 16 JUNE 2016</div>
@@ -675,26 +669,22 @@ if ($_POST) {
 
 
     <!--Vendor-JS-->
-    <script src="assests/vassets/js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="assests/vassets/js/vendor/bootstrap.min.js"></script>
+    <script src="assests/auth/home/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="assests/auth/home/js/vendor/bootstrap.min.js"></script>
     <!--Plugin-JS-->
-    <script src="assests/vassets/js/owl.carousel.min.js"></script>
-    <script src="assests/vassets/js/appear.js"></script>
-    <script src="assests/vassets/js/bars.js"></script>
-    <script src="assests/vassets/js/waypoints.min.js"></script>
-    <script src="assests/vassets/js/counterup.min.js"></script>
-    <script src="assests/vassets/js/easypiechart.min.js"></script>
-    <script src="assests/vassets/js/mixitup.min.js"></script>
-    <script src="assests/vassets/js/scrollUp.min.js"></script>
-    <script src="assests/vassets/js/magnific-popup.min.js"></script>
-    <script src="assests/vassets/js/wow.min.js"></script>
+    <script src="assests/auth/home/js/owl.carousel.min.js"></script>
+    <script src="assests/auth/home/js/appear.js"></script>
+    <script src="assests/auth/home/js/bars.js"></script>
+    <script src="assests/auth/home/js/waypoints.min.js"></script>
+    <script src="assests/auth/home/js/counterup.min.js"></script>
+    <script src="assests/auth/home/js/easypiechart.min.js"></script>
+    <script src="assests/auth/home/js/mixitup.min.js"></script>
+    <script src="assests/auth/home/js/scrollUp.min.js"></script>
+    <script src="assests/auth/home/js/magnific-popup.min.js"></script>
+    <script src="assests/auth/home/js/wow.min.js"></script>
     <!--Main-active-JS-->
-    <script src="assests/vassets/js/main.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDXZ3vJtdK6aKAEWBovZFe4YKj1SGo9V20&callback=initMap"></script>
-    <script src="assests/vassets/js/maps.js"></script>
-    <script type="text/javascript">
-        //function for tittle scrolling
-    </script>
+    <script src="assests/auth/home/js/main.js"></script>
+    <script src="assests/auth/home/js/maps.js"></script>
 </body>
 
 </html>

@@ -105,12 +105,12 @@ if (isset($_POST["adminSubmit"])) {
 	<title>Stokers | Register</title>
 	<link rel="shortcut icon" href="vassets/images/gtitle.png" />
 
-	<link rel="stylesheet" href="assests/regassets/css.css">
-	<link rel="stylesheet" href="assests/regassets/bootstrap.min.css">
-	<link rel="stylesheet" href="assests/regassets/font-awesome.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="assests/auth/register/css.css">
+	<link rel="stylesheet" href="assests/auth/register/bootstrap.min.css">
+	<link rel="stylesheet" href="assests/auth/register/font-awesome.min.css">
+	<link rel="stylesheet" href="assests/font-awesome/css/font-awesome.min.css">
 
-	<link rel="stylesheet" href="assests/regassets/form-wizard-blue.css">
+	<link rel="stylesheet" href="assests/auth/register/form-wizard-blue.css">
 
 	<style type="text/css" media="screen">
 		.header-button-group,
@@ -146,7 +146,7 @@ if (isset($_POST["adminSubmit"])) {
 	<style type="text/css"></style>
 </head>
 
-<body oncontextmenu="return false;" style="background: url('assests/regassets/images/bg.jpg'); background-size: cover;">
+<body oncontextmenu="return false;" style="background: url('assests/auth/register/images/bg.jpg'); background-size: cover;">
 
 
 	<!-- main content -->
@@ -218,6 +218,7 @@ if (isset($_POST["adminSubmit"])) {
 										<input type="password" id="token" name="token" placeholder="Company token" class="form-control required">
 									</div>
 								<?php } ?>
+
 								<div class="form-group">
 									<label>Email: <span>*</span></label>
 									<input type="email" id="email" name="email" placeholder="admin@stokers.com" class="form-control required">
@@ -354,18 +355,18 @@ if (isset($_POST["adminSubmit"])) {
 									<input type="text" id="account_no" name="account_no" placeholder="469801*****890" class="form-control required">
 								</div>
 								<?php if ($_GET['type'] === "admin") {  ?>
-									<div class="form-group">
+									<!-- <div class="form-group">
 										<label>Certificate: </label>
-										<input type="file" data-class="blah" class="imgInp" name="certificate" class="form-control required">
+										<input type="file" data-class="blah" id="certificate" class="imgInp" name="certificate" class="form-control required">
 										<br />
 										<img id="blah" src="#" width="100" />
 									</div>
 									<div class="form-group">
 										<label>Logo: </label>
-										<input type="file" data-class="blah2" class="imgInp" name="logo" class="form-control required">
+										<input type="file" data-class="blah2" id="logo" class="imgInp" name="logo" class="form-control required">
 										<br />
 										<img id="blah2" src="#" width="100" />
-									</div>
+									</div> -->
 								<?php } ?>
 								<br>
 								<div class="form-wizard-buttons">
@@ -450,9 +451,9 @@ if (isset($_POST["adminSubmit"])) {
 	</section>
 	<!-- main content -->
 
-	<script src="assests/regassets/jquery-1.11.1.min.js"></script>
-	<script src="assests/regassets/bootstrap.min.js"></script>
-	<script src="assests/regassets/form-wizard.js"></script>
+	<script src="assests/auth/register/jquery-1.11.1.min.js"></script>
+	<script src="assests/auth/register/bootstrap.min.js"></script>
+	<script src="assests/auth/register/form-wizard.js"></script>
 
 	<script type="text/javascript">
 		$('#classic').click(function() {
